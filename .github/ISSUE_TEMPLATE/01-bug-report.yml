@@ -1,0 +1,61 @@
+name: Bug report / 错误报告
+description: Report a reproducible problem in restore, scale, revise, or render.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem. Remove usernames, absolute paths, tokens, and private image content from logs before posting.
+  - type: dropdown
+    id: command
+    attributes:
+      label: Command
+      options: [restore, scale, revise, render, installation, other]
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options: [macOS Apple Silicon, macOS Intel, Linux, Windows, other]
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Python, NumPy, Pillow, and restore-bead-pattern version or commit.
+      placeholder: "Python 3.12; NumPy 2.3.5; Pillow 12.3.0; v0.4.1"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Provide the command and smallest safe reproduction. Replace local paths with placeholders.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and sanitized logs
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public data confirmation
+      options:
+        - label: I removed credentials, personal information, absolute paths, and private source pixels.
+          required: true
+        - label: Any attached image is mine to share or has a compatible public license.
+          required: true
+        - label: This is not a security vulnerability; security reports belong in the private advisory form.
+          required: true
