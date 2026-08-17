@@ -6,6 +6,25 @@
 
 当前算法版本：`0.4.1`；输出 Schema：`1.2`。
 
+> **macOS 版本说明**：当前公开发行版以 macOS 本地流程为主要使用环境；核心 Python CLI 同时通过 Ubuntu 上的 Python 3.10–3.12 CI。Windows 尚未验证。
+
+## macOS 版本示例
+
+<table>
+  <tr>
+    <td width="33.33%" align="center"><img src="docs/images/macos-cat-reference.png" alt="猫脸插画参考图"></td>
+    <td width="33.33%" align="center"><img src="docs/images/macos-question-man-grid.png" alt="问号男人 78×78 拼豆图纸"></td>
+    <td width="33.33%" align="center"><img src="docs/images/macos-glasses-character-grid.png" alt="眼镜角色 78×78 拼豆图纸"></td>
+  </tr>
+  <tr>
+    <td align="center">猫脸插画参考图</td>
+    <td align="center">问号男人 · 78×78 成品图纸</td>
+    <td align="center">眼镜角色 · 78×78 成品图纸</td>
+  </tr>
+</table>
+
+> 图示来自本地 macOS 实验版工作流。普通照片或插画转新拼豆设计的实验模式尚未包含在本开源 Skill；当前仓库开源的是“已有离散网格复原”流程。
+
 ## 功能
 
 - 自动估计原生方格的格距、相位和内容尺寸。
