@@ -1,0 +1,2702 @@
+{
+  "schema_version": "1.0",
+  "id": "mard-221-compatible",
+  "display_name": "MARD 221 Compatible (Community/Retailer Reference)",
+  "code_system": "mard-221",
+  "reference_type": "community-open-source-screen-rgb",
+  "compatible_size_note": "This file describes a color-code compatibility reference, not bead diameter availability. Confirm the target merchant's physical product size separately.",
+  "accessed_at": "2026-08-16",
+  "license_spdx": "MIT",
+  "copyright": "Copyright (c) 2026 Jett-Wu",
+  "source_commit": "36ac52d570246ab600611a79edd2236bccb954e5",
+  "license_url": "https://github.com/Jett-Wu/Perler_Beads_Generator/blob/36ac52d570246ab600611a79edd2236bccb954e5/LICENSE",
+  "notice_file": "THIRD_PARTY_NOTICES.md",
+  "sources": [
+    {
+      "url": "https://github.com/Jett-Wu/Perler_Beads_Generator/blob/36ac52d570246ab600611a79edd2236bccb954e5/src/palette.ts",
+      "type": "licensed-redistribution-source",
+      "license_spdx": "MIT",
+      "copyright": "Copyright (c) 2026 Jett-Wu",
+      "commit": "36ac52d570246ab600611a79edd2236bccb954e5",
+      "license_url": "https://github.com/Jett-Wu/Perler_Beads_Generator/blob/36ac52d570246ab600611a79edd2236bccb954e5/LICENSE",
+      "note": "The 221 code/HEX pairs are reproduced from rawColorsCsv under the upstream MIT License. Preserve the bundled third-party notice when redistributing this table."
+    },
+    {
+      "url": "https://www.pindou.online/colors",
+      "type": "verification-only",
+      "note": "Independent value cross-check only. No redistribution license or endorsement is claimed from this site."
+    },
+    {
+      "url": "https://www.bitbead.app/en/colors/mard",
+      "type": "verification-only",
+      "note": "Independent value cross-check only. No redistribution license or endorsement is claimed from this site."
+    }
+  ],
+  "groups": {
+    "A": 26,
+    "B": 32,
+    "C": 29,
+    "D": 26,
+    "E": 24,
+    "F": 25,
+    "G": 21,
+    "H": 23,
+    "M": 15
+  },
+  "disclaimer": "Optional compatibility reference reproduced from the licensed source identified above and independently cross-checked against public screen charts. It is not an official MARD specification and was not produced from calibrated physical-bead measurements. HEX/RGB values are device-oriented approximations and may differ from real beads because of batch, finish, lighting, camera, and display conditions.",
+  "trademark_disclaimer": "The MARD name is used solely to describe compatibility. This project is independent and is not affiliated with, sponsored by, or endorsed by MARD or any referenced retailer. Product names and trademarks belong to their respective owners.",
+  "entries": [
+    {
+      "code": "A1",
+      "name": "mard-a1",
+      "symbol": "A1",
+      "rgb": [
+        250,
+        244,
+        200
+      ],
+      "rgb_hex": "#FAF4C8",
+      "role": "accent"
+    },
+    {
+      "code": "A2",
+      "name": "mard-a2",
+      "symbol": "A2",
+      "rgb": [
+        255,
+        255,
+        213
+      ],
+      "rgb_hex": "#FFFFD5",
+      "role": "accent"
+    },
+    {
+      "code": "A3",
+      "name": "mard-a3",
+      "symbol": "A3",
+      "rgb": [
+        254,
+        255,
+        139
+      ],
+      "rgb_hex": "#FEFF8B",
+      "role": "accent"
+    },
+    {
+      "code": "A4",
+      "name": "mard-a4",
+      "symbol": "A4",
+      "rgb": [
+        251,
+        237,
+        86
+      ],
+      "rgb_hex": "#FBED56",
+      "role": "accent"
+    },
+    {
+      "code": "A5",
+      "name": "mard-a5",
+      "symbol": "A5",
+      "rgb": [
+        244,
+        215,
+        56
+      ],
+      "rgb_hex": "#F4D738",
+      "role": "accent"
+    },
+    {
+      "code": "A6",
+      "name": "mard-a6",
+      "symbol": "A6",
+      "rgb": [
+        254,
+        172,
+        76
+      ],
+      "rgb_hex": "#FEAC4C",
+      "role": "accent"
+    },
+    {
+      "code": "A7",
+      "name": "mard-a7",
+      "symbol": "A7",
+      "rgb": [
+        254,
+        139,
+        76
+      ],
+      "rgb_hex": "#FE8B4C",
+      "role": "accent"
+    },
+    {
+      "code": "A8",
+      "name": "mard-a8",
+      "symbol": "A8",
+      "rgb": [
+        255,
+        218,
+        69
+      ],
+      "rgb_hex": "#FFDA45",
+      "role": "accent"
+    },
+    {
+      "code": "A9",
+      "name": "mard-a9",
+      "symbol": "A9",
+      "rgb": [
+        255,
+        153,
+        91
+      ],
+      "rgb_hex": "#FF995B",
+      "role": "accent"
+    },
+    {
+      "code": "A10",
+      "name": "mard-a10",
+      "symbol": "A10",
+      "rgb": [
+        247,
+        124,
+        49
+      ],
+      "rgb_hex": "#F77C31",
+      "role": "accent"
+    },
+    {
+      "code": "A11",
+      "name": "mard-a11",
+      "symbol": "A11",
+      "rgb": [
+        255,
+        221,
+        153
+      ],
+      "rgb_hex": "#FFDD99",
+      "role": "accent"
+    },
+    {
+      "code": "A12",
+      "name": "mard-a12",
+      "symbol": "A12",
+      "rgb": [
+        254,
+        159,
+        114
+      ],
+      "rgb_hex": "#FE9F72",
+      "role": "accent"
+    },
+    {
+      "code": "A13",
+      "name": "mard-a13",
+      "symbol": "A13",
+      "rgb": [
+        255,
+        195,
+        101
+      ],
+      "rgb_hex": "#FFC365",
+      "role": "accent"
+    },
+    {
+      "code": "A14",
+      "name": "mard-a14",
+      "symbol": "A14",
+      "rgb": [
+        253,
+        84,
+        61
+      ],
+      "rgb_hex": "#FD543D",
+      "role": "accent"
+    },
+    {
+      "code": "A15",
+      "name": "mard-a15",
+      "symbol": "A15",
+      "rgb": [
+        255,
+        243,
+        101
+      ],
+      "rgb_hex": "#FFF365",
+      "role": "accent"
+    },
+    {
+      "code": "A16",
+      "name": "mard-a16",
+      "symbol": "A16",
+      "rgb": [
+        255,
+        255,
+        159
+      ],
+      "rgb_hex": "#FFFF9F",
+      "role": "accent"
+    },
+    {
+      "code": "A17",
+      "name": "mard-a17",
+      "symbol": "A17",
+      "rgb": [
+        255,
+        227,
+        110
+      ],
+      "rgb_hex": "#FFE36E",
+      "role": "accent"
+    },
+    {
+      "code": "A18",
+      "name": "mard-a18",
+      "symbol": "A18",
+      "rgb": [
+        254,
+        190,
+        125
+      ],
+      "rgb_hex": "#FEBE7D",
+      "role": "accent"
+    },
+    {
+      "code": "A19",
+      "name": "mard-a19",
+      "symbol": "A19",
+      "rgb": [
+        253,
+        124,
+        114
+      ],
+      "rgb_hex": "#FD7C72",
+      "role": "accent"
+    },
+    {
+      "code": "A20",
+      "name": "mard-a20",
+      "symbol": "A20",
+      "rgb": [
+        255,
+        213,
+        104
+      ],
+      "rgb_hex": "#FFD568",
+      "role": "accent"
+    },
+    {
+      "code": "A21",
+      "name": "mard-a21",
+      "symbol": "A21",
+      "rgb": [
+        255,
+        227,
+        149
+      ],
+      "rgb_hex": "#FFE395",
+      "role": "accent"
+    },
+    {
+      "code": "A22",
+      "name": "mard-a22",
+      "symbol": "A22",
+      "rgb": [
+        244,
+        245,
+        125
+      ],
+      "rgb_hex": "#F4F57D",
+      "role": "accent"
+    },
+    {
+      "code": "A23",
+      "name": "mard-a23",
+      "symbol": "A23",
+      "rgb": [
+        230,
+        201,
+        183
+      ],
+      "rgb_hex": "#E6C9B7",
+      "role": "accent"
+    },
+    {
+      "code": "A24",
+      "name": "mard-a24",
+      "symbol": "A24",
+      "rgb": [
+        247,
+        248,
+        162
+      ],
+      "rgb_hex": "#F7F8A2",
+      "role": "accent"
+    },
+    {
+      "code": "A25",
+      "name": "mard-a25",
+      "symbol": "A25",
+      "rgb": [
+        255,
+        214,
+        125
+      ],
+      "rgb_hex": "#FFD67D",
+      "role": "accent"
+    },
+    {
+      "code": "A26",
+      "name": "mard-a26",
+      "symbol": "A26",
+      "rgb": [
+        255,
+        200,
+        48
+      ],
+      "rgb_hex": "#FFC830",
+      "role": "accent"
+    },
+    {
+      "code": "B1",
+      "name": "mard-b1",
+      "symbol": "B1",
+      "rgb": [
+        230,
+        238,
+        49
+      ],
+      "rgb_hex": "#E6EE31",
+      "role": "accent"
+    },
+    {
+      "code": "B2",
+      "name": "mard-b2",
+      "symbol": "B2",
+      "rgb": [
+        99,
+        243,
+        71
+      ],
+      "rgb_hex": "#63F347",
+      "role": "accent"
+    },
+    {
+      "code": "B3",
+      "name": "mard-b3",
+      "symbol": "B3",
+      "rgb": [
+        158,
+        247,
+        128
+      ],
+      "rgb_hex": "#9EF780",
+      "role": "accent"
+    },
+    {
+      "code": "B4",
+      "name": "mard-b4",
+      "symbol": "B4",
+      "rgb": [
+        93,
+        224,
+        53
+      ],
+      "rgb_hex": "#5DE035",
+      "role": "accent"
+    },
+    {
+      "code": "B5",
+      "name": "mard-b5",
+      "symbol": "B5",
+      "rgb": [
+        53,
+        227,
+        82
+      ],
+      "rgb_hex": "#35E352",
+      "role": "accent"
+    },
+    {
+      "code": "B6",
+      "name": "mard-b6",
+      "symbol": "B6",
+      "rgb": [
+        101,
+        226,
+        166
+      ],
+      "rgb_hex": "#65E2A6",
+      "role": "accent"
+    },
+    {
+      "code": "B7",
+      "name": "mard-b7",
+      "symbol": "B7",
+      "rgb": [
+        61,
+        175,
+        128
+      ],
+      "rgb_hex": "#3DAF80",
+      "role": "accent"
+    },
+    {
+      "code": "B8",
+      "name": "mard-b8",
+      "symbol": "B8",
+      "rgb": [
+        28,
+        156,
+        79
+      ],
+      "rgb_hex": "#1C9C4F",
+      "role": "accent"
+    },
+    {
+      "code": "B9",
+      "name": "mard-b9",
+      "symbol": "B9",
+      "rgb": [
+        39,
+        82,
+        58
+      ],
+      "rgb_hex": "#27523A",
+      "role": "accent"
+    },
+    {
+      "code": "B10",
+      "name": "mard-b10",
+      "symbol": "B10",
+      "rgb": [
+        149,
+        211,
+        194
+      ],
+      "rgb_hex": "#95D3C2",
+      "role": "accent"
+    },
+    {
+      "code": "B11",
+      "name": "mard-b11",
+      "symbol": "B11",
+      "rgb": [
+        93,
+        114,
+        42
+      ],
+      "rgb_hex": "#5D722A",
+      "role": "accent"
+    },
+    {
+      "code": "B12",
+      "name": "mard-b12",
+      "symbol": "B12",
+      "rgb": [
+        22,
+        111,
+        65
+      ],
+      "rgb_hex": "#166F41",
+      "role": "accent"
+    },
+    {
+      "code": "B13",
+      "name": "mard-b13",
+      "symbol": "B13",
+      "rgb": [
+        202,
+        235,
+        123
+      ],
+      "rgb_hex": "#CAEB7B",
+      "role": "accent"
+    },
+    {
+      "code": "B14",
+      "name": "mard-b14",
+      "symbol": "B14",
+      "rgb": [
+        173,
+        233,
+        70
+      ],
+      "rgb_hex": "#ADE946",
+      "role": "accent"
+    },
+    {
+      "code": "B15",
+      "name": "mard-b15",
+      "symbol": "B15",
+      "rgb": [
+        46,
+        81,
+        50
+      ],
+      "rgb_hex": "#2E5132",
+      "role": "accent"
+    },
+    {
+      "code": "B16",
+      "name": "mard-b16",
+      "symbol": "B16",
+      "rgb": [
+        197,
+        237,
+        156
+      ],
+      "rgb_hex": "#C5ED9C",
+      "role": "accent"
+    },
+    {
+      "code": "B17",
+      "name": "mard-b17",
+      "symbol": "B17",
+      "rgb": [
+        155,
+        177,
+        58
+      ],
+      "rgb_hex": "#9BB13A",
+      "role": "accent"
+    },
+    {
+      "code": "B18",
+      "name": "mard-b18",
+      "symbol": "B18",
+      "rgb": [
+        230,
+        238,
+        73
+      ],
+      "rgb_hex": "#E6EE49",
+      "role": "accent"
+    },
+    {
+      "code": "B19",
+      "name": "mard-b19",
+      "symbol": "B19",
+      "rgb": [
+        36,
+        184,
+        140
+      ],
+      "rgb_hex": "#24B88C",
+      "role": "accent"
+    },
+    {
+      "code": "B20",
+      "name": "mard-b20",
+      "symbol": "B20",
+      "rgb": [
+        194,
+        240,
+        204
+      ],
+      "rgb_hex": "#C2F0CC",
+      "role": "accent"
+    },
+    {
+      "code": "B21",
+      "name": "mard-b21",
+      "symbol": "B21",
+      "rgb": [
+        21,
+        106,
+        107
+      ],
+      "rgb_hex": "#156A6B",
+      "role": "accent"
+    },
+    {
+      "code": "B22",
+      "name": "mard-b22",
+      "symbol": "B22",
+      "rgb": [
+        11,
+        60,
+        67
+      ],
+      "rgb_hex": "#0B3C43",
+      "role": "accent"
+    },
+    {
+      "code": "B23",
+      "name": "mard-b23",
+      "symbol": "B23",
+      "rgb": [
+        48,
+        58,
+        33
+      ],
+      "rgb_hex": "#303A21",
+      "role": "accent"
+    },
+    {
+      "code": "B24",
+      "name": "mard-b24",
+      "symbol": "B24",
+      "rgb": [
+        238,
+        252,
+        165
+      ],
+      "rgb_hex": "#EEFCA5",
+      "role": "accent"
+    },
+    {
+      "code": "B25",
+      "name": "mard-b25",
+      "symbol": "B25",
+      "rgb": [
+        78,
+        132,
+        109
+      ],
+      "rgb_hex": "#4E846D",
+      "role": "accent"
+    },
+    {
+      "code": "B26",
+      "name": "mard-b26",
+      "symbol": "B26",
+      "rgb": [
+        141,
+        122,
+        53
+      ],
+      "rgb_hex": "#8D7A35",
+      "role": "accent"
+    },
+    {
+      "code": "B27",
+      "name": "mard-b27",
+      "symbol": "B27",
+      "rgb": [
+        204,
+        225,
+        175
+      ],
+      "rgb_hex": "#CCE1AF",
+      "role": "accent"
+    },
+    {
+      "code": "B28",
+      "name": "mard-b28",
+      "symbol": "B28",
+      "rgb": [
+        158,
+        229,
+        185
+      ],
+      "rgb_hex": "#9EE5B9",
+      "role": "accent"
+    },
+    {
+      "code": "B29",
+      "name": "mard-b29",
+      "symbol": "B29",
+      "rgb": [
+        197,
+        226,
+        84
+      ],
+      "rgb_hex": "#C5E254",
+      "role": "accent"
+    },
+    {
+      "code": "B30",
+      "name": "mard-b30",
+      "symbol": "B30",
+      "rgb": [
+        226,
+        252,
+        177
+      ],
+      "rgb_hex": "#E2FCB1",
+      "role": "accent"
+    },
+    {
+      "code": "B31",
+      "name": "mard-b31",
+      "symbol": "B31",
+      "rgb": [
+        176,
+        231,
+        146
+      ],
+      "rgb_hex": "#B0E792",
+      "role": "accent"
+    },
+    {
+      "code": "B32",
+      "name": "mard-b32",
+      "symbol": "B32",
+      "rgb": [
+        156,
+        171,
+        90
+      ],
+      "rgb_hex": "#9CAB5A",
+      "role": "accent"
+    },
+    {
+      "code": "C1",
+      "name": "mard-c1",
+      "symbol": "C1",
+      "rgb": [
+        232,
+        255,
+        231
+      ],
+      "rgb_hex": "#E8FFE7",
+      "role": "accent"
+    },
+    {
+      "code": "C2",
+      "name": "mard-c2",
+      "symbol": "C2",
+      "rgb": [
+        169,
+        249,
+        252
+      ],
+      "rgb_hex": "#A9F9FC",
+      "role": "accent"
+    },
+    {
+      "code": "C3",
+      "name": "mard-c3",
+      "symbol": "C3",
+      "rgb": [
+        160,
+        226,
+        251
+      ],
+      "rgb_hex": "#A0E2FB",
+      "role": "accent"
+    },
+    {
+      "code": "C4",
+      "name": "mard-c4",
+      "symbol": "C4",
+      "rgb": [
+        65,
+        204,
+        255
+      ],
+      "rgb_hex": "#41CCFF",
+      "role": "accent"
+    },
+    {
+      "code": "C5",
+      "name": "mard-c5",
+      "symbol": "C5",
+      "rgb": [
+        1,
+        172,
+        235
+      ],
+      "rgb_hex": "#01ACEB",
+      "role": "accent"
+    },
+    {
+      "code": "C6",
+      "name": "mard-c6",
+      "symbol": "C6",
+      "rgb": [
+        80,
+        170,
+        240
+      ],
+      "rgb_hex": "#50AAF0",
+      "role": "accent"
+    },
+    {
+      "code": "C7",
+      "name": "mard-c7",
+      "symbol": "C7",
+      "rgb": [
+        54,
+        119,
+        210
+      ],
+      "rgb_hex": "#3677D2",
+      "role": "accent"
+    },
+    {
+      "code": "C8",
+      "name": "mard-c8",
+      "symbol": "C8",
+      "rgb": [
+        15,
+        84,
+        192
+      ],
+      "rgb_hex": "#0F54C0",
+      "role": "accent"
+    },
+    {
+      "code": "C9",
+      "name": "mard-c9",
+      "symbol": "C9",
+      "rgb": [
+        50,
+        75,
+        202
+      ],
+      "rgb_hex": "#324BCA",
+      "role": "accent"
+    },
+    {
+      "code": "C10",
+      "name": "mard-c10",
+      "symbol": "C10",
+      "rgb": [
+        62,
+        188,
+        226
+      ],
+      "rgb_hex": "#3EBCE2",
+      "role": "accent"
+    },
+    {
+      "code": "C11",
+      "name": "mard-c11",
+      "symbol": "C11",
+      "rgb": [
+        40,
+        221,
+        222
+      ],
+      "rgb_hex": "#28DDDE",
+      "role": "accent"
+    },
+    {
+      "code": "C12",
+      "name": "mard-c12",
+      "symbol": "C12",
+      "rgb": [
+        28,
+        51,
+        77
+      ],
+      "rgb_hex": "#1C334D",
+      "role": "accent"
+    },
+    {
+      "code": "C13",
+      "name": "mard-c13",
+      "symbol": "C13",
+      "rgb": [
+        205,
+        232,
+        255
+      ],
+      "rgb_hex": "#CDE8FF",
+      "role": "accent"
+    },
+    {
+      "code": "C14",
+      "name": "mard-c14",
+      "symbol": "C14",
+      "rgb": [
+        213,
+        253,
+        255
+      ],
+      "rgb_hex": "#D5FDFF",
+      "role": "accent"
+    },
+    {
+      "code": "C15",
+      "name": "mard-c15",
+      "symbol": "C15",
+      "rgb": [
+        34,
+        196,
+        198
+      ],
+      "rgb_hex": "#22C4C6",
+      "role": "accent"
+    },
+    {
+      "code": "C16",
+      "name": "mard-c16",
+      "symbol": "C16",
+      "rgb": [
+        21,
+        87,
+        168
+      ],
+      "rgb_hex": "#1557A8",
+      "role": "accent"
+    },
+    {
+      "code": "C17",
+      "name": "mard-c17",
+      "symbol": "C17",
+      "rgb": [
+        4,
+        209,
+        246
+      ],
+      "rgb_hex": "#04D1F6",
+      "role": "accent"
+    },
+    {
+      "code": "C18",
+      "name": "mard-c18",
+      "symbol": "C18",
+      "rgb": [
+        29,
+        51,
+        68
+      ],
+      "rgb_hex": "#1D3344",
+      "role": "accent"
+    },
+    {
+      "code": "C19",
+      "name": "mard-c19",
+      "symbol": "C19",
+      "rgb": [
+        24,
+        135,
+        162
+      ],
+      "rgb_hex": "#1887A2",
+      "role": "accent"
+    },
+    {
+      "code": "C20",
+      "name": "mard-c20",
+      "symbol": "C20",
+      "rgb": [
+        23,
+        109,
+        175
+      ],
+      "rgb_hex": "#176DAF",
+      "role": "accent"
+    },
+    {
+      "code": "C21",
+      "name": "mard-c21",
+      "symbol": "C21",
+      "rgb": [
+        190,
+        221,
+        255
+      ],
+      "rgb_hex": "#BEDDFF",
+      "role": "accent"
+    },
+    {
+      "code": "C22",
+      "name": "mard-c22",
+      "symbol": "C22",
+      "rgb": [
+        103,
+        180,
+        190
+      ],
+      "rgb_hex": "#67B4BE",
+      "role": "accent"
+    },
+    {
+      "code": "C23",
+      "name": "mard-c23",
+      "symbol": "C23",
+      "rgb": [
+        200,
+        226,
+        255
+      ],
+      "rgb_hex": "#C8E2FF",
+      "role": "accent"
+    },
+    {
+      "code": "C24",
+      "name": "mard-c24",
+      "symbol": "C24",
+      "rgb": [
+        124,
+        196,
+        255
+      ],
+      "rgb_hex": "#7CC4FF",
+      "role": "accent"
+    },
+    {
+      "code": "C25",
+      "name": "mard-c25",
+      "symbol": "C25",
+      "rgb": [
+        169,
+        229,
+        229
+      ],
+      "rgb_hex": "#A9E5E5",
+      "role": "accent"
+    },
+    {
+      "code": "C26",
+      "name": "mard-c26",
+      "symbol": "C26",
+      "rgb": [
+        60,
+        174,
+        216
+      ],
+      "rgb_hex": "#3CAED8",
+      "role": "accent"
+    },
+    {
+      "code": "C27",
+      "name": "mard-c27",
+      "symbol": "C27",
+      "rgb": [
+        211,
+        223,
+        250
+      ],
+      "rgb_hex": "#D3DFFA",
+      "role": "accent"
+    },
+    {
+      "code": "C28",
+      "name": "mard-c28",
+      "symbol": "C28",
+      "rgb": [
+        187,
+        207,
+        237
+      ],
+      "rgb_hex": "#BBCFED",
+      "role": "accent"
+    },
+    {
+      "code": "C29",
+      "name": "mard-c29",
+      "symbol": "C29",
+      "rgb": [
+        52,
+        72,
+        142
+      ],
+      "rgb_hex": "#34488E",
+      "role": "accent"
+    },
+    {
+      "code": "D1",
+      "name": "mard-d1",
+      "symbol": "D1",
+      "rgb": [
+        174,
+        180,
+        242
+      ],
+      "rgb_hex": "#AEB4F2",
+      "role": "accent"
+    },
+    {
+      "code": "D2",
+      "name": "mard-d2",
+      "symbol": "D2",
+      "rgb": [
+        133,
+        142,
+        221
+      ],
+      "rgb_hex": "#858EDD",
+      "role": "accent"
+    },
+    {
+      "code": "D3",
+      "name": "mard-d3",
+      "symbol": "D3",
+      "rgb": [
+        47,
+        84,
+        175
+      ],
+      "rgb_hex": "#2F54AF",
+      "role": "accent"
+    },
+    {
+      "code": "D4",
+      "name": "mard-d4",
+      "symbol": "D4",
+      "rgb": [
+        24,
+        42,
+        132
+      ],
+      "rgb_hex": "#182A84",
+      "role": "accent"
+    },
+    {
+      "code": "D5",
+      "name": "mard-d5",
+      "symbol": "D5",
+      "rgb": [
+        184,
+        67,
+        197
+      ],
+      "rgb_hex": "#B843C5",
+      "role": "accent"
+    },
+    {
+      "code": "D6",
+      "name": "mard-d6",
+      "symbol": "D6",
+      "rgb": [
+        172,
+        123,
+        222
+      ],
+      "rgb_hex": "#AC7BDE",
+      "role": "accent"
+    },
+    {
+      "code": "D7",
+      "name": "mard-d7",
+      "symbol": "D7",
+      "rgb": [
+        136,
+        84,
+        179
+      ],
+      "rgb_hex": "#8854B3",
+      "role": "accent"
+    },
+    {
+      "code": "D8",
+      "name": "mard-d8",
+      "symbol": "D8",
+      "rgb": [
+        226,
+        211,
+        255
+      ],
+      "rgb_hex": "#E2D3FF",
+      "role": "accent"
+    },
+    {
+      "code": "D9",
+      "name": "mard-d9",
+      "symbol": "D9",
+      "rgb": [
+        213,
+        185,
+        248
+      ],
+      "rgb_hex": "#D5B9F8",
+      "role": "accent"
+    },
+    {
+      "code": "D10",
+      "name": "mard-d10",
+      "symbol": "D10",
+      "rgb": [
+        54,
+        24,
+        81
+      ],
+      "rgb_hex": "#361851",
+      "role": "accent"
+    },
+    {
+      "code": "D11",
+      "name": "mard-d11",
+      "symbol": "D11",
+      "rgb": [
+        185,
+        186,
+        225
+      ],
+      "rgb_hex": "#B9BAE1",
+      "role": "accent"
+    },
+    {
+      "code": "D12",
+      "name": "mard-d12",
+      "symbol": "D12",
+      "rgb": [
+        222,
+        154,
+        212
+      ],
+      "rgb_hex": "#DE9AD4",
+      "role": "accent"
+    },
+    {
+      "code": "D13",
+      "name": "mard-d13",
+      "symbol": "D13",
+      "rgb": [
+        185,
+        0,
+        149
+      ],
+      "rgb_hex": "#B90095",
+      "role": "accent"
+    },
+    {
+      "code": "D14",
+      "name": "mard-d14",
+      "symbol": "D14",
+      "rgb": [
+        139,
+        39,
+        155
+      ],
+      "rgb_hex": "#8B279B",
+      "role": "accent"
+    },
+    {
+      "code": "D15",
+      "name": "mard-d15",
+      "symbol": "D15",
+      "rgb": [
+        47,
+        31,
+        144
+      ],
+      "rgb_hex": "#2F1F90",
+      "role": "accent"
+    },
+    {
+      "code": "D16",
+      "name": "mard-d16",
+      "symbol": "D16",
+      "rgb": [
+        227,
+        225,
+        238
+      ],
+      "rgb_hex": "#E3E1EE",
+      "role": "accent"
+    },
+    {
+      "code": "D17",
+      "name": "mard-d17",
+      "symbol": "D17",
+      "rgb": [
+        196,
+        212,
+        246
+      ],
+      "rgb_hex": "#C4D4F6",
+      "role": "accent"
+    },
+    {
+      "code": "D18",
+      "name": "mard-d18",
+      "symbol": "D18",
+      "rgb": [
+        164,
+        94,
+        199
+      ],
+      "rgb_hex": "#A45EC7",
+      "role": "accent"
+    },
+    {
+      "code": "D19",
+      "name": "mard-d19",
+      "symbol": "D19",
+      "rgb": [
+        216,
+        195,
+        215
+      ],
+      "rgb_hex": "#D8C3D7",
+      "role": "accent"
+    },
+    {
+      "code": "D20",
+      "name": "mard-d20",
+      "symbol": "D20",
+      "rgb": [
+        156,
+        50,
+        178
+      ],
+      "rgb_hex": "#9C32B2",
+      "role": "accent"
+    },
+    {
+      "code": "D21",
+      "name": "mard-d21",
+      "symbol": "D21",
+      "rgb": [
+        154,
+        0,
+        155
+      ],
+      "rgb_hex": "#9A009B",
+      "role": "accent"
+    },
+    {
+      "code": "D22",
+      "name": "mard-d22",
+      "symbol": "D22",
+      "rgb": [
+        51,
+        58,
+        149
+      ],
+      "rgb_hex": "#333A95",
+      "role": "accent"
+    },
+    {
+      "code": "D23",
+      "name": "mard-d23",
+      "symbol": "D23",
+      "rgb": [
+        235,
+        218,
+        252
+      ],
+      "rgb_hex": "#EBDAFC",
+      "role": "accent"
+    },
+    {
+      "code": "D24",
+      "name": "mard-d24",
+      "symbol": "D24",
+      "rgb": [
+        119,
+        134,
+        229
+      ],
+      "rgb_hex": "#7786E5",
+      "role": "accent"
+    },
+    {
+      "code": "D25",
+      "name": "mard-d25",
+      "symbol": "D25",
+      "rgb": [
+        73,
+        79,
+        199
+      ],
+      "rgb_hex": "#494FC7",
+      "role": "accent"
+    },
+    {
+      "code": "D26",
+      "name": "mard-d26",
+      "symbol": "D26",
+      "rgb": [
+        223,
+        194,
+        248
+      ],
+      "rgb_hex": "#DFC2F8",
+      "role": "accent"
+    },
+    {
+      "code": "E1",
+      "name": "mard-e1",
+      "symbol": "E1",
+      "rgb": [
+        253,
+        211,
+        204
+      ],
+      "rgb_hex": "#FDD3CC",
+      "role": "accent"
+    },
+    {
+      "code": "E2",
+      "name": "mard-e2",
+      "symbol": "E2",
+      "rgb": [
+        254,
+        192,
+        223
+      ],
+      "rgb_hex": "#FEC0DF",
+      "role": "accent"
+    },
+    {
+      "code": "E3",
+      "name": "mard-e3",
+      "symbol": "E3",
+      "rgb": [
+        255,
+        183,
+        231
+      ],
+      "rgb_hex": "#FFB7E7",
+      "role": "accent"
+    },
+    {
+      "code": "E4",
+      "name": "mard-e4",
+      "symbol": "E4",
+      "rgb": [
+        232,
+        100,
+        158
+      ],
+      "rgb_hex": "#E8649E",
+      "role": "accent"
+    },
+    {
+      "code": "E5",
+      "name": "mard-e5",
+      "symbol": "E5",
+      "rgb": [
+        245,
+        81,
+        162
+      ],
+      "rgb_hex": "#F551A2",
+      "role": "accent"
+    },
+    {
+      "code": "E6",
+      "name": "mard-e6",
+      "symbol": "E6",
+      "rgb": [
+        241,
+        61,
+        116
+      ],
+      "rgb_hex": "#F13D74",
+      "role": "accent"
+    },
+    {
+      "code": "E7",
+      "name": "mard-e7",
+      "symbol": "E7",
+      "rgb": [
+        198,
+        52,
+        120
+      ],
+      "rgb_hex": "#C63478",
+      "role": "accent"
+    },
+    {
+      "code": "E8",
+      "name": "mard-e8",
+      "symbol": "E8",
+      "rgb": [
+        255,
+        219,
+        233
+      ],
+      "rgb_hex": "#FFDBE9",
+      "role": "accent"
+    },
+    {
+      "code": "E9",
+      "name": "mard-e9",
+      "symbol": "E9",
+      "rgb": [
+        233,
+        112,
+        204
+      ],
+      "rgb_hex": "#E970CC",
+      "role": "accent"
+    },
+    {
+      "code": "E10",
+      "name": "mard-e10",
+      "symbol": "E10",
+      "rgb": [
+        211,
+        55,
+        147
+      ],
+      "rgb_hex": "#D33793",
+      "role": "accent"
+    },
+    {
+      "code": "E11",
+      "name": "mard-e11",
+      "symbol": "E11",
+      "rgb": [
+        252,
+        221,
+        210
+      ],
+      "rgb_hex": "#FCDDD2",
+      "role": "accent"
+    },
+    {
+      "code": "E12",
+      "name": "mard-e12",
+      "symbol": "E12",
+      "rgb": [
+        247,
+        143,
+        195
+      ],
+      "rgb_hex": "#F78FC3",
+      "role": "accent"
+    },
+    {
+      "code": "E13",
+      "name": "mard-e13",
+      "symbol": "E13",
+      "rgb": [
+        181,
+        0,
+        109
+      ],
+      "rgb_hex": "#B5006D",
+      "role": "accent"
+    },
+    {
+      "code": "E14",
+      "name": "mard-e14",
+      "symbol": "E14",
+      "rgb": [
+        255,
+        209,
+        186
+      ],
+      "rgb_hex": "#FFD1BA",
+      "role": "accent"
+    },
+    {
+      "code": "E15",
+      "name": "mard-e15",
+      "symbol": "E15",
+      "rgb": [
+        248,
+        199,
+        201
+      ],
+      "rgb_hex": "#F8C7C9",
+      "role": "accent"
+    },
+    {
+      "code": "E16",
+      "name": "mard-e16",
+      "symbol": "E16",
+      "rgb": [
+        255,
+        243,
+        235
+      ],
+      "rgb_hex": "#FFF3EB",
+      "role": "accent"
+    },
+    {
+      "code": "E17",
+      "name": "mard-e17",
+      "symbol": "E17",
+      "rgb": [
+        255,
+        226,
+        234
+      ],
+      "rgb_hex": "#FFE2EA",
+      "role": "accent"
+    },
+    {
+      "code": "E18",
+      "name": "mard-e18",
+      "symbol": "E18",
+      "rgb": [
+        255,
+        199,
+        219
+      ],
+      "rgb_hex": "#FFC7DB",
+      "role": "accent"
+    },
+    {
+      "code": "E19",
+      "name": "mard-e19",
+      "symbol": "E19",
+      "rgb": [
+        254,
+        186,
+        213
+      ],
+      "rgb_hex": "#FEBAD5",
+      "role": "accent"
+    },
+    {
+      "code": "E20",
+      "name": "mard-e20",
+      "symbol": "E20",
+      "rgb": [
+        216,
+        199,
+        209
+      ],
+      "rgb_hex": "#D8C7D1",
+      "role": "accent"
+    },
+    {
+      "code": "E21",
+      "name": "mard-e21",
+      "symbol": "E21",
+      "rgb": [
+        189,
+        157,
+        161
+      ],
+      "rgb_hex": "#BD9DA1",
+      "role": "accent"
+    },
+    {
+      "code": "E22",
+      "name": "mard-e22",
+      "symbol": "E22",
+      "rgb": [
+        183,
+        133,
+        161
+      ],
+      "rgb_hex": "#B785A1",
+      "role": "accent"
+    },
+    {
+      "code": "E23",
+      "name": "mard-e23",
+      "symbol": "E23",
+      "rgb": [
+        147,
+        122,
+        141
+      ],
+      "rgb_hex": "#937A8D",
+      "role": "accent"
+    },
+    {
+      "code": "E24",
+      "name": "mard-e24",
+      "symbol": "E24",
+      "rgb": [
+        225,
+        188,
+        232
+      ],
+      "rgb_hex": "#E1BCE8",
+      "role": "accent"
+    },
+    {
+      "code": "F1",
+      "name": "mard-f1",
+      "symbol": "F1",
+      "rgb": [
+        253,
+        149,
+        123
+      ],
+      "rgb_hex": "#FD957B",
+      "role": "accent"
+    },
+    {
+      "code": "F2",
+      "name": "mard-f2",
+      "symbol": "F2",
+      "rgb": [
+        252,
+        61,
+        70
+      ],
+      "rgb_hex": "#FC3D46",
+      "role": "accent"
+    },
+    {
+      "code": "F3",
+      "name": "mard-f3",
+      "symbol": "F3",
+      "rgb": [
+        247,
+        73,
+        65
+      ],
+      "rgb_hex": "#F74941",
+      "role": "accent"
+    },
+    {
+      "code": "F4",
+      "name": "mard-f4",
+      "symbol": "F4",
+      "rgb": [
+        252,
+        40,
+        60
+      ],
+      "rgb_hex": "#FC283C",
+      "role": "accent"
+    },
+    {
+      "code": "F5",
+      "name": "mard-f5",
+      "symbol": "F5",
+      "rgb": [
+        231,
+        0,
+        47
+      ],
+      "rgb_hex": "#E7002F",
+      "role": "accent"
+    },
+    {
+      "code": "F6",
+      "name": "mard-f6",
+      "symbol": "F6",
+      "rgb": [
+        148,
+        54,
+        48
+      ],
+      "rgb_hex": "#943630",
+      "role": "accent"
+    },
+    {
+      "code": "F7",
+      "name": "mard-f7",
+      "symbol": "F7",
+      "rgb": [
+        151,
+        25,
+        55
+      ],
+      "rgb_hex": "#971937",
+      "role": "accent"
+    },
+    {
+      "code": "F8",
+      "name": "mard-f8",
+      "symbol": "F8",
+      "rgb": [
+        188,
+        0,
+        40
+      ],
+      "rgb_hex": "#BC0028",
+      "role": "accent"
+    },
+    {
+      "code": "F9",
+      "name": "mard-f9",
+      "symbol": "F9",
+      "rgb": [
+        226,
+        103,
+        122
+      ],
+      "rgb_hex": "#E2677A",
+      "role": "accent"
+    },
+    {
+      "code": "F10",
+      "name": "mard-f10",
+      "symbol": "F10",
+      "rgb": [
+        138,
+        69,
+        38
+      ],
+      "rgb_hex": "#8A4526",
+      "role": "accent"
+    },
+    {
+      "code": "F11",
+      "name": "mard-f11",
+      "symbol": "F11",
+      "rgb": [
+        90,
+        33,
+        33
+      ],
+      "rgb_hex": "#5A2121",
+      "role": "accent"
+    },
+    {
+      "code": "F12",
+      "name": "mard-f12",
+      "symbol": "F12",
+      "rgb": [
+        253,
+        78,
+        106
+      ],
+      "rgb_hex": "#FD4E6A",
+      "role": "accent"
+    },
+    {
+      "code": "F13",
+      "name": "mard-f13",
+      "symbol": "F13",
+      "rgb": [
+        243,
+        87,
+        68
+      ],
+      "rgb_hex": "#F35744",
+      "role": "accent"
+    },
+    {
+      "code": "F14",
+      "name": "mard-f14",
+      "symbol": "F14",
+      "rgb": [
+        255,
+        169,
+        173
+      ],
+      "rgb_hex": "#FFA9AD",
+      "role": "accent"
+    },
+    {
+      "code": "F15",
+      "name": "mard-f15",
+      "symbol": "F15",
+      "rgb": [
+        211,
+        0,
+        34
+      ],
+      "rgb_hex": "#D30022",
+      "role": "accent"
+    },
+    {
+      "code": "F16",
+      "name": "mard-f16",
+      "symbol": "F16",
+      "rgb": [
+        254,
+        194,
+        166
+      ],
+      "rgb_hex": "#FEC2A6",
+      "role": "accent"
+    },
+    {
+      "code": "F17",
+      "name": "mard-f17",
+      "symbol": "F17",
+      "rgb": [
+        230,
+        156,
+        121
+      ],
+      "rgb_hex": "#E69C79",
+      "role": "accent"
+    },
+    {
+      "code": "F18",
+      "name": "mard-f18",
+      "symbol": "F18",
+      "rgb": [
+        211,
+        124,
+        70
+      ],
+      "rgb_hex": "#D37C46",
+      "role": "accent"
+    },
+    {
+      "code": "F19",
+      "name": "mard-f19",
+      "symbol": "F19",
+      "rgb": [
+        193,
+        68,
+        74
+      ],
+      "rgb_hex": "#C1444A",
+      "role": "accent"
+    },
+    {
+      "code": "F20",
+      "name": "mard-f20",
+      "symbol": "F20",
+      "rgb": [
+        205,
+        147,
+        145
+      ],
+      "rgb_hex": "#CD9391",
+      "role": "accent"
+    },
+    {
+      "code": "F21",
+      "name": "mard-f21",
+      "symbol": "F21",
+      "rgb": [
+        247,
+        180,
+        198
+      ],
+      "rgb_hex": "#F7B4C6",
+      "role": "accent"
+    },
+    {
+      "code": "F22",
+      "name": "mard-f22",
+      "symbol": "F22",
+      "rgb": [
+        253,
+        192,
+        208
+      ],
+      "rgb_hex": "#FDC0D0",
+      "role": "accent"
+    },
+    {
+      "code": "F23",
+      "name": "mard-f23",
+      "symbol": "F23",
+      "rgb": [
+        246,
+        126,
+        102
+      ],
+      "rgb_hex": "#F67E66",
+      "role": "accent"
+    },
+    {
+      "code": "F24",
+      "name": "mard-f24",
+      "symbol": "F24",
+      "rgb": [
+        230,
+        152,
+        170
+      ],
+      "rgb_hex": "#E698AA",
+      "role": "accent"
+    },
+    {
+      "code": "F25",
+      "name": "mard-f25",
+      "symbol": "F25",
+      "rgb": [
+        229,
+        75,
+        79
+      ],
+      "rgb_hex": "#E54B4F",
+      "role": "accent"
+    },
+    {
+      "code": "G1",
+      "name": "mard-g1",
+      "symbol": "G1",
+      "rgb": [
+        255,
+        226,
+        206
+      ],
+      "rgb_hex": "#FFE2CE",
+      "role": "accent"
+    },
+    {
+      "code": "G2",
+      "name": "mard-g2",
+      "symbol": "G2",
+      "rgb": [
+        255,
+        196,
+        170
+      ],
+      "rgb_hex": "#FFC4AA",
+      "role": "accent"
+    },
+    {
+      "code": "G3",
+      "name": "mard-g3",
+      "symbol": "G3",
+      "rgb": [
+        244,
+        195,
+        165
+      ],
+      "rgb_hex": "#F4C3A5",
+      "role": "accent"
+    },
+    {
+      "code": "G4",
+      "name": "mard-g4",
+      "symbol": "G4",
+      "rgb": [
+        225,
+        179,
+        131
+      ],
+      "rgb_hex": "#E1B383",
+      "role": "accent"
+    },
+    {
+      "code": "G5",
+      "name": "mard-g5",
+      "symbol": "G5",
+      "rgb": [
+        237,
+        176,
+        69
+      ],
+      "rgb_hex": "#EDB045",
+      "role": "accent"
+    },
+    {
+      "code": "G6",
+      "name": "mard-g6",
+      "symbol": "G6",
+      "rgb": [
+        233,
+        156,
+        23
+      ],
+      "rgb_hex": "#E99C17",
+      "role": "accent"
+    },
+    {
+      "code": "G7",
+      "name": "mard-g7",
+      "symbol": "G7",
+      "rgb": [
+        157,
+        91,
+        62
+      ],
+      "rgb_hex": "#9D5B3E",
+      "role": "accent"
+    },
+    {
+      "code": "G8",
+      "name": "mard-g8",
+      "symbol": "G8",
+      "rgb": [
+        117,
+        56,
+        50
+      ],
+      "rgb_hex": "#753832",
+      "role": "accent"
+    },
+    {
+      "code": "G9",
+      "name": "mard-g9",
+      "symbol": "G9",
+      "rgb": [
+        230,
+        180,
+        131
+      ],
+      "rgb_hex": "#E6B483",
+      "role": "accent"
+    },
+    {
+      "code": "G10",
+      "name": "mard-g10",
+      "symbol": "G10",
+      "rgb": [
+        217,
+        140,
+        57
+      ],
+      "rgb_hex": "#D98C39",
+      "role": "accent"
+    },
+    {
+      "code": "G11",
+      "name": "mard-g11",
+      "symbol": "G11",
+      "rgb": [
+        224,
+        197,
+        147
+      ],
+      "rgb_hex": "#E0C593",
+      "role": "accent"
+    },
+    {
+      "code": "G12",
+      "name": "mard-g12",
+      "symbol": "G12",
+      "rgb": [
+        255,
+        200,
+        144
+      ],
+      "rgb_hex": "#FFC890",
+      "role": "accent"
+    },
+    {
+      "code": "G13",
+      "name": "mard-g13",
+      "symbol": "G13",
+      "rgb": [
+        183,
+        113,
+        74
+      ],
+      "rgb_hex": "#B7714A",
+      "role": "accent"
+    },
+    {
+      "code": "G14",
+      "name": "mard-g14",
+      "symbol": "G14",
+      "rgb": [
+        141,
+        97,
+        76
+      ],
+      "rgb_hex": "#8D614C",
+      "role": "accent"
+    },
+    {
+      "code": "G15",
+      "name": "mard-g15",
+      "symbol": "G15",
+      "rgb": [
+        252,
+        249,
+        224
+      ],
+      "rgb_hex": "#FCF9E0",
+      "role": "accent"
+    },
+    {
+      "code": "G16",
+      "name": "mard-g16",
+      "symbol": "G16",
+      "rgb": [
+        242,
+        217,
+        186
+      ],
+      "rgb_hex": "#F2D9BA",
+      "role": "accent"
+    },
+    {
+      "code": "G17",
+      "name": "mard-g17",
+      "symbol": "G17",
+      "rgb": [
+        120,
+        82,
+        75
+      ],
+      "rgb_hex": "#78524B",
+      "role": "accent"
+    },
+    {
+      "code": "G18",
+      "name": "mard-g18",
+      "symbol": "G18",
+      "rgb": [
+        255,
+        228,
+        204
+      ],
+      "rgb_hex": "#FFE4CC",
+      "role": "accent"
+    },
+    {
+      "code": "G19",
+      "name": "mard-g19",
+      "symbol": "G19",
+      "rgb": [
+        224,
+        121,
+        53
+      ],
+      "rgb_hex": "#E07935",
+      "role": "accent"
+    },
+    {
+      "code": "G20",
+      "name": "mard-g20",
+      "symbol": "G20",
+      "rgb": [
+        169,
+        64,
+        35
+      ],
+      "rgb_hex": "#A94023",
+      "role": "accent"
+    },
+    {
+      "code": "G21",
+      "name": "mard-g21",
+      "symbol": "G21",
+      "rgb": [
+        184,
+        133,
+        88
+      ],
+      "rgb_hex": "#B88558",
+      "role": "accent"
+    },
+    {
+      "code": "H1",
+      "name": "mard-h1",
+      "symbol": "H1",
+      "rgb": [
+        253,
+        251,
+        255
+      ],
+      "rgb_hex": "#FDFBFF",
+      "role": "accent"
+    },
+    {
+      "code": "H2",
+      "name": "mard-h2",
+      "symbol": "H2",
+      "rgb": [
+        254,
+        255,
+        255
+      ],
+      "rgb_hex": "#FEFFFF",
+      "role": "accent"
+    },
+    {
+      "code": "H3",
+      "name": "mard-h3",
+      "symbol": "H3",
+      "rgb": [
+        182,
+        177,
+        186
+      ],
+      "rgb_hex": "#B6B1BA",
+      "role": "accent"
+    },
+    {
+      "code": "H4",
+      "name": "mard-h4",
+      "symbol": "H4",
+      "rgb": [
+        137,
+        133,
+        140
+      ],
+      "rgb_hex": "#89858C",
+      "role": "accent"
+    },
+    {
+      "code": "H5",
+      "name": "mard-h5",
+      "symbol": "H5",
+      "rgb": [
+        72,
+        70,
+        78
+      ],
+      "rgb_hex": "#48464E",
+      "role": "accent"
+    },
+    {
+      "code": "H6",
+      "name": "mard-h6",
+      "symbol": "H6",
+      "rgb": [
+        47,
+        43,
+        47
+      ],
+      "rgb_hex": "#2F2B2F",
+      "role": "accent"
+    },
+    {
+      "code": "H7",
+      "name": "mard-h7",
+      "symbol": "H7",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "rgb_hex": "#000000",
+      "role": "accent"
+    },
+    {
+      "code": "H8",
+      "name": "mard-h8",
+      "symbol": "H8",
+      "rgb": [
+        231,
+        214,
+        219
+      ],
+      "rgb_hex": "#E7D6DB",
+      "role": "accent"
+    },
+    {
+      "code": "H9",
+      "name": "mard-h9",
+      "symbol": "H9",
+      "rgb": [
+        237,
+        237,
+        237
+      ],
+      "rgb_hex": "#EDEDED",
+      "role": "accent"
+    },
+    {
+      "code": "H10",
+      "name": "mard-h10",
+      "symbol": "H10",
+      "rgb": [
+        238,
+        233,
+        234
+      ],
+      "rgb_hex": "#EEE9EA",
+      "role": "accent"
+    },
+    {
+      "code": "H11",
+      "name": "mard-h11",
+      "symbol": "H11",
+      "rgb": [
+        206,
+        205,
+        213
+      ],
+      "rgb_hex": "#CECDD5",
+      "role": "accent"
+    },
+    {
+      "code": "H12",
+      "name": "mard-h12",
+      "symbol": "H12",
+      "rgb": [
+        255,
+        245,
+        237
+      ],
+      "rgb_hex": "#FFF5ED",
+      "role": "accent"
+    },
+    {
+      "code": "H13",
+      "name": "mard-h13",
+      "symbol": "H13",
+      "rgb": [
+        245,
+        236,
+        210
+      ],
+      "rgb_hex": "#F5ECD2",
+      "role": "accent"
+    },
+    {
+      "code": "H14",
+      "name": "mard-h14",
+      "symbol": "H14",
+      "rgb": [
+        207,
+        215,
+        211
+      ],
+      "rgb_hex": "#CFD7D3",
+      "role": "accent"
+    },
+    {
+      "code": "H15",
+      "name": "mard-h15",
+      "symbol": "H15",
+      "rgb": [
+        152,
+        166,
+        168
+      ],
+      "rgb_hex": "#98A6A8",
+      "role": "accent"
+    },
+    {
+      "code": "H16",
+      "name": "mard-h16",
+      "symbol": "H16",
+      "rgb": [
+        29,
+        20,
+        20
+      ],
+      "rgb_hex": "#1D1414",
+      "role": "accent"
+    },
+    {
+      "code": "H17",
+      "name": "mard-h17",
+      "symbol": "H17",
+      "rgb": [
+        241,
+        237,
+        237
+      ],
+      "rgb_hex": "#F1EDED",
+      "role": "accent"
+    },
+    {
+      "code": "H18",
+      "name": "mard-h18",
+      "symbol": "H18",
+      "rgb": [
+        255,
+        253,
+        240
+      ],
+      "rgb_hex": "#FFFDF0",
+      "role": "accent"
+    },
+    {
+      "code": "H19",
+      "name": "mard-h19",
+      "symbol": "H19",
+      "rgb": [
+        246,
+        239,
+        226
+      ],
+      "rgb_hex": "#F6EFE2",
+      "role": "accent"
+    },
+    {
+      "code": "H20",
+      "name": "mard-h20",
+      "symbol": "H20",
+      "rgb": [
+        148,
+        159,
+        163
+      ],
+      "rgb_hex": "#949FA3",
+      "role": "accent"
+    },
+    {
+      "code": "H21",
+      "name": "mard-h21",
+      "symbol": "H21",
+      "rgb": [
+        255,
+        251,
+        225
+      ],
+      "rgb_hex": "#FFFBE1",
+      "role": "accent"
+    },
+    {
+      "code": "H22",
+      "name": "mard-h22",
+      "symbol": "H22",
+      "rgb": [
+        202,
+        202,
+        212
+      ],
+      "rgb_hex": "#CACAD4",
+      "role": "accent"
+    },
+    {
+      "code": "H23",
+      "name": "mard-h23",
+      "symbol": "H23",
+      "rgb": [
+        154,
+        157,
+        148
+      ],
+      "rgb_hex": "#9A9D94",
+      "role": "accent"
+    },
+    {
+      "code": "M1",
+      "name": "mard-m1",
+      "symbol": "M1",
+      "rgb": [
+        188,
+        198,
+        184
+      ],
+      "rgb_hex": "#BCC6B8",
+      "role": "accent"
+    },
+    {
+      "code": "M2",
+      "name": "mard-m2",
+      "symbol": "M2",
+      "rgb": [
+        138,
+        163,
+        134
+      ],
+      "rgb_hex": "#8AA386",
+      "role": "accent"
+    },
+    {
+      "code": "M3",
+      "name": "mard-m3",
+      "symbol": "M3",
+      "rgb": [
+        105,
+        125,
+        128
+      ],
+      "rgb_hex": "#697D80",
+      "role": "accent"
+    },
+    {
+      "code": "M4",
+      "name": "mard-m4",
+      "symbol": "M4",
+      "rgb": [
+        227,
+        210,
+        188
+      ],
+      "rgb_hex": "#E3D2BC",
+      "role": "accent"
+    },
+    {
+      "code": "M5",
+      "name": "mard-m5",
+      "symbol": "M5",
+      "rgb": [
+        208,
+        204,
+        170
+      ],
+      "rgb_hex": "#D0CCAA",
+      "role": "accent"
+    },
+    {
+      "code": "M6",
+      "name": "mard-m6",
+      "symbol": "M6",
+      "rgb": [
+        176,
+        167,
+        130
+      ],
+      "rgb_hex": "#B0A782",
+      "role": "accent"
+    },
+    {
+      "code": "M7",
+      "name": "mard-m7",
+      "symbol": "M7",
+      "rgb": [
+        180,
+        164,
+        151
+      ],
+      "rgb_hex": "#B4A497",
+      "role": "accent"
+    },
+    {
+      "code": "M8",
+      "name": "mard-m8",
+      "symbol": "M8",
+      "rgb": [
+        179,
+        130,
+        129
+      ],
+      "rgb_hex": "#B38281",
+      "role": "accent"
+    },
+    {
+      "code": "M9",
+      "name": "mard-m9",
+      "symbol": "M9",
+      "rgb": [
+        165,
+        135,
+        103
+      ],
+      "rgb_hex": "#A58767",
+      "role": "accent"
+    },
+    {
+      "code": "M10",
+      "name": "mard-m10",
+      "symbol": "M10",
+      "rgb": [
+        197,
+        178,
+        188
+      ],
+      "rgb_hex": "#C5B2BC",
+      "role": "accent"
+    },
+    {
+      "code": "M11",
+      "name": "mard-m11",
+      "symbol": "M11",
+      "rgb": [
+        159,
+        117,
+        148
+      ],
+      "rgb_hex": "#9F7594",
+      "role": "accent"
+    },
+    {
+      "code": "M12",
+      "name": "mard-m12",
+      "symbol": "M12",
+      "rgb": [
+        100,
+        71,
+        73
+      ],
+      "rgb_hex": "#644749",
+      "role": "accent"
+    },
+    {
+      "code": "M13",
+      "name": "mard-m13",
+      "symbol": "M13",
+      "rgb": [
+        209,
+        144,
+        102
+      ],
+      "rgb_hex": "#D19066",
+      "role": "accent"
+    },
+    {
+      "code": "M14",
+      "name": "mard-m14",
+      "symbol": "M14",
+      "rgb": [
+        199,
+        115,
+        98
+      ],
+      "rgb_hex": "#C77362",
+      "role": "accent"
+    },
+    {
+      "code": "M15",
+      "name": "mard-m15",
+      "symbol": "M15",
+      "rgb": [
+        117,
+        125,
+        120
+      ],
+      "rgb_hex": "#757D78",
+      "role": "accent"
+    }
+  ]
+}

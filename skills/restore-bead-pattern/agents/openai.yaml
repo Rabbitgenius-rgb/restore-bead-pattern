@@ -1,0 +1,4 @@
+interface:
+  display_name: "拼豆图纸复原与温州模具适配"
+  short_description: "复原原生网格、匹配MARD 221色号、同步放大并适配52/78模具"
+  default_prompt: "使用 $restore-bead-pattern 从这张现有离散作品图片恢复原生网格；如果目标是拼豆，请映射到内置 MARD 221 compatible 色号并适配温州 52×52 或 78×78 模具。只在我明确要求主体同步放大时，对已恢复的逻辑格子做整数复制，不要重新分割照片纹理。"
