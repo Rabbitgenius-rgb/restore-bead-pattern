@@ -1,0 +1,15 @@
+* @Rabbitgenius-rgb
+
+# Security-sensitive workflow and output handling
+/.github/workflows/ @Rabbitgenius-rgb
+/skills/restore-bead-pattern/scripts/restore_pattern.py @Rabbitgenius-rgb
+/skills/restore-bead-pattern/scripts/wenzhou_mold.py @Rabbitgenius-rgb
+
+# Licensing and redistributed palette data
+/LICENSE @Rabbitgenius-rgb
+/THIRD_PARTY_NOTICES.md @Rabbitgenius-rgb
+/ASSET_ATTRIBUTIONS.md @Rabbitgenius-rgb
+/skills/restore-bead-pattern/LICENSE.txt @Rabbitgenius-rgb
+/skills/restore-bead-pattern/THIRD_PARTY_NOTICES.md @Rabbitgenius-rgb
+/skills/restore-bead-pattern/assets/palettes/ @Rabbitgenius-rgb
+/skills/restore-bead-pattern/third_party/ @Rabbitgenius-rgb

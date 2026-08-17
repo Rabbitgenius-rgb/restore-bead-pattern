@@ -1,0 +1,49 @@
+name: Feature request / 功能建议
+description: Propose an improvement that fits the existing-grid restoration scope.
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What real workflow is blocked today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe inputs, outputs, and review/failure behavior.
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - Existing-grid restoration
+        - Grid estimation or geometry
+        - Palette or color matching
+        - Wenzhou board placement
+        - Review, revise, or rendering
+        - Documentation or installation
+        - Ordinary photo/illustration redesign (separate experimental proposal)
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and acceptance criteria
+      description: How could a maintainer verify that this is complete without relying on one private image?
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Project boundaries
+      options:
+        - label: The proposal preserves uncertainty and does not silently redraw unsupported cells.
+          required: true
+        - label: I will discuss new third-party data or palettes before copying them into the repository.
+          required: true

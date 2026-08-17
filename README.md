@@ -6,24 +6,38 @@
 
 当前算法版本：`0.4.1`；输出 Schema：`1.2`。
 
-> **macOS 版本说明**：当前公开发行版以 macOS 本地流程为主要使用环境；核心 Python CLI 同时通过 Ubuntu 上的 Python 3.10–3.12 CI。Windows 尚未验证。
+> **macOS 版本说明**：当前公开发行版以 macOS 本地流程为主要使用环境；核心 Python CLI 同时通过 Ubuntu 上的 Python 3.10–3.12 与 macOS 14 / Python 3.12 CI。Windows 尚未验证。
 
 ## macOS 版本示例
 
 <table>
   <tr>
-    <td width="33.33%" align="center"><img src="docs/images/macos-cat-reference.png" alt="猫脸插画参考图"></td>
-    <td width="33.33%" align="center"><img src="docs/images/macos-question-man-grid.png" alt="问号男人 78×78 拼豆图纸"></td>
-    <td width="33.33%" align="center"><img src="docs/images/macos-glasses-character-grid.png" alt="眼镜角色 78×78 拼豆图纸"></td>
+    <td width="33.33%" align="center"><img src="docs/images/macos-synthetic-source.png" alt="程序生成的绒线纹理测试源图"></td>
+    <td width="33.33%" align="center"><img src="docs/images/macos-restored-grid.png" alt="恢复出的原生逻辑网格"></td>
+    <td width="33.33%" align="center"><img src="docs/images/macos-scaled-board-grid.png" alt="六倍整数复制后放入52×52模具的图纸"></td>
   </tr>
   <tr>
-    <td align="center">猫脸插画参考图</td>
-    <td align="center">问号男人 · 78×78 成品图纸</td>
-    <td align="center">眼镜角色 · 78×78 成品图纸</td>
+    <td align="center">合成绒线纹理输入</td>
+    <td align="center">原生网格复原</td>
+    <td align="center">6×整数复制 · 52×52模具</td>
   </tr>
 </table>
 
-> 图示来自本地 macOS 实验版工作流。普通照片或插画转新拼豆设计的实验模式尚未包含在本开源 Skill；当前仓库开源的是“已有离散网格复原”流程。
+> 三张图均由项目的确定性合成 fixture 和公开 Skill 在 macOS 本地生成，不含第三方参考图。它们展示的是“已有离散网格复原”和明确授权后的整数放大流程。
+
+## 欢迎志愿者 / Contributors welcome
+
+不会编程也可以参与。当前特别需要：
+
+- Apple Silicon 与 Intel Mac 的干净安装测试；
+- 中英文文档、无障碍说明和教程；
+- 本人拥有版权或明确开放许可的拼豆、十字绣、簇绒测试样本；
+- 实体52×52 / 78×78模具测量和色卡差异记录；
+- Python/CV 网格识别、旋转/透视处理及确定性回归测试。
+
+从 [`good first issue`](https://github.com/Rabbitgenius-rgb/restore-bead-pattern/labels/good%20first%20issue) 或 [`help wanted`](https://github.com/Rabbitgenius-rgb/restore-bead-pattern/labels/help%20wanted) 领取一个小任务。开始前请阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md)，使用问题与想法请发到 [Discussions](https://github.com/Rabbitgenius-rgb/restore-bead-pattern/discussions)。安全问题请按 [`SECURITY.md`](SECURITY.md) 私下报告。
+
+提交样本时不要上传未授权角色图、付费图纸、商家完整色卡或含私人信息的截图。合并后的贡献会出现在 GitHub Contributors；重要贡献也会在 Release Notes 中致谢。
 
 ## 功能
 
@@ -136,4 +150,4 @@ python3 tests/validate_release.py
 
 ## 许可证
 
-项目代码采用 [MIT License](LICENSE)。第三方数据的许可证与归因见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+项目代码和项目生成的合成文档素材采用 [MIT License](LICENSE)。第三方数据的许可证与归因见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)，展示素材来源与哈希见 [ASSET_ATTRIBUTIONS.md](ASSET_ATTRIBUTIONS.md)。

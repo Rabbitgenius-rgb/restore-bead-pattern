@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas / 使用问题与想法
+    url: https://github.com/Rabbitgenius-rgb/restore-bead-pattern/discussions
+    about: Ask for help or discuss an idea before opening a work item.
+  - name: Private security report / 私密安全报告
+    url: https://github.com/Rabbitgenius-rgb/restore-bead-pattern/security/advisories/new
+    about: Do not disclose vulnerabilities in a public issue.

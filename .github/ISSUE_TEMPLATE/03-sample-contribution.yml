@@ -1,0 +1,50 @@
+name: Sample or fixture contribution / 样本贡献
+description: Offer a safely licensed image, matrix, or measurement for testing.
+title: "[Sample]: "
+labels: ["sample-data", "needs-triage"]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Contribution type
+      options:
+        - Programmatically generated synthetic fixture
+        - Original image and manually reviewed matrix
+        - CC0 or Public Domain image
+        - CC BY image with attribution
+        - Physical mold measurement
+        - Palette metadata or measurement
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: What does this test?
+      description: Explain the failure mode or coverage this contribution adds.
+    validations:
+      required: true
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Source, author, and license
+      description: Include URLs, author, exact license, and any required attribution. Do not upload the file until this is reviewed.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result or annotation method
+      description: Describe grid size, known cells, measurements, or how ground truth was produced.
+    validations:
+      required: true
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Rights and privacy declaration
+      options:
+        - label: I have the right to redistribute this material in an MIT-licensed public repository, or I identified its compatible license above.
+          required: true
+        - label: The material contains no private data, location metadata, paid pattern, unlicensed character art, or merchant chart copied without permission.
+          required: true
+        - label: I understand maintainers may request a synthetic replacement instead of storing the original file.
+          required: true

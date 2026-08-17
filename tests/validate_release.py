@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import re
 from pathlib import Path
 
@@ -28,6 +29,23 @@ PRIVATE_PATTERNS = (
     b"codex-clipboard",
     b"ChatGPT/",
 )
+EXPECTED_MEDIA = {
+    "docs/images/macos-synthetic-source.png": "ca7fb123d46f46a8772a152ccf470ff1a3bcb44ac0bbbceddb17bbbf1320d866",
+    "docs/images/macos-restored-grid.png": "55b7c5d113ff07dd53570d2b8986029dbae5f89c15dda205cb12f858fb92f992",
+    "docs/images/macos-scaled-board-grid.png": "9eff70fb2abe9b40893b568af7d50744b7bf36ce8c136f8f2b4260b777e2357e",
+}
+EXPECTED_COMMUNITY_FILES = {
+    ".github/CODEOWNERS",
+    ".github/ISSUE_TEMPLATE/01-bug-report.yml",
+    ".github/ISSUE_TEMPLATE/02-feature-request.yml",
+    ".github/ISSUE_TEMPLATE/03-sample-contribution.yml",
+    ".github/ISSUE_TEMPLATE/config.yml",
+    ".github/pull_request_template.md",
+    "ASSET_ATTRIBUTIONS.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "SUPPORT.md",
+}
 
 
 def fail(message: str) -> None:
@@ -66,6 +84,12 @@ def main() -> None:
     if frontmatter["name"] != SKILL.name:
         fail("skill name does not match its directory")
 
+    missing_community = sorted(
+        relative for relative in EXPECTED_COMMUNITY_FILES if not (ROOT / relative).is_file()
+    )
+    if missing_community:
+        fail(f"missing community health files: {missing_community}")
+
     for path in ROOT.rglob("*"):
         if not path.is_file() or ".git" in path.parts:
             continue
@@ -81,6 +105,26 @@ def main() -> None:
     upstream_license = (SKILL / "third_party" / "Jett-Wu-MIT.txt").read_text(encoding="utf-8")
     if "Copyright (c) 2026 Jett-Wu" not in upstream_license or "MIT License" not in upstream_license:
         fail("upstream palette license notice is incomplete")
+
+    actual_media = {
+        path.relative_to(ROOT).as_posix()
+        for path in ROOT.rglob("*")
+        if path.is_file()
+        and ".git" not in path.parts
+        and path.suffix.lower() in {".png", ".jpg", ".jpeg", ".gif", ".webp"}
+    }
+    if actual_media != set(EXPECTED_MEDIA):
+        fail(
+            f"media allowlist mismatch: missing={sorted(set(EXPECTED_MEDIA) - actual_media)}, "
+            f"extra={sorted(actual_media - set(EXPECTED_MEDIA))}"
+        )
+    attribution = (ROOT / "ASSET_ATTRIBUTIONS.md").read_text(encoding="utf-8")
+    for relative, expected_sha in EXPECTED_MEDIA.items():
+        actual_sha = hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
+        if actual_sha != expected_sha:
+            fail(f"media digest changed without review: {relative}")
+        if relative not in attribution or expected_sha not in attribution:
+            fail(f"media attribution is incomplete: {relative}")
 
     print("restore-bead-pattern release validation: PASS")
 
