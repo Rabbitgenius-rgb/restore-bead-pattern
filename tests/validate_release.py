@@ -16,6 +16,7 @@ EXPECTED_SKILL_FILES = {
     "agents/openai.yaml",
     "assets/palettes/mard-221-compatible.json",
     "references/contracts.md",
+    "scripts/design_bead_pattern.py",
     "scripts/grid_estimator.py",
     "scripts/restore_pattern.py",
     "scripts/self_test.py",

@@ -6,12 +6,13 @@ Thank you for contributing. Non-code contributions—testing, documentation, rep
 
 ## 项目边界
 
-本仓库恢复**源图中已经存在**的离散方格。它不负责把普通照片或插画重新设计成像素画。提交前请保持以下边界：
+本仓库有两条必须明确分开的流程：`restore` 恢复**源图中已经存在**的离散方格；`design` 把普通照片或插画缩减为新的 52×52 或 78×78 拼豆设计。提交前请保持以下边界：
 
-- 恢复原生网格，不凭语义重画角色；
-- 保留不确定性，不为了“更像”而修改无证据格子；
-- 模具、色卡和原生网格是相互独立的概念；
-- 普通图片转新拼豆设计属于另一个实验方向，先在 Discussion 提案，不要直接混入恢复流程。
+- `restore` 只恢复原生网格，不凭语义重画角色；
+- `restore` 保留不确定性，不为了“更像”而修改无证据格子；
+- `design` 始终输出 `review`、`not_restoration: true`，不得冒充原生网格复原；
+- 可复用设计流程必须保持通用，不得硬编码某张样本、角色或私人图片的坐标和修正规则；
+- 模具、色卡、原生网格和新设计画布是相互独立的概念。
 
 ## 可以怎样参与
 
@@ -19,7 +20,7 @@ Thank you for contributing. Non-code contributions—testing, documentation, rep
 - **文档**：改进中文说明、增加英文翻译、补充无障碍文本；
 - **测试数据**：贡献本人拥有版权或明确开放许可的样本及预期矩阵；
 - **材料核验**：记录实体模具尺寸或商家色卡差异，但不要复制无再分发许可的完整色卡；
-- **Python / CV**：网格估计、旋转/透视处理、拓扑、色彩匹配、鲁棒性测试；
+- **Python / CV**：网格估计、旋转/透视处理、拓扑、通用图片量化、色彩匹配、鲁棒性测试；
 - **Issue 整理**：复现问题、补充环境信息、确认重复报告。
 
 优先从 [`good first issue`](https://github.com/Rabbitgenius-rgb/restore-bead-pattern/labels/good%20first%20issue) 或 [`help wanted`](https://github.com/Rabbitgenius-rgb/restore-bead-pattern/labels/help%20wanted) 开始。领取任务前先留言说明计划，避免重复劳动。
