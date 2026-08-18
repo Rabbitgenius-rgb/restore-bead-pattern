@@ -1,16 +1,19 @@
-# Restore Pattern Contracts
+# Restore and Design Pattern Contracts
 
-Use this reference when invoking the bundled script, reading its output, requesting a Wenzhou mold, supplying a palette, or applying confirmed edits.
+Use this reference when choosing between native-grid restoration and a new raster-derived bead design, invoking either bundled script, reading its output, requesting a Wenzhou mold, supplying a palette, or applying confirmed restoration edits.
 
 ## Contents
 
 - Restore CLI and board modes
+- Generic 52×52/78×78 design CLI and output schema
 - Coordinate spaces and output artifacts
 - Explicit integer design scaling
 - Board metadata
 - Custom palette JSON
 - Built-in MARD 221 compatible profile
 - Review, revision, topology, and status gates
+
+Use macOS with Python 3.10–3.12, NumPy, and Pillow as the primary validated local environment. The restore CLI also receives Ubuntu CI coverage; Windows remains unverified.
 
 ## Restore CLI
 
@@ -47,6 +50,37 @@ restore_pattern.py restore INPUT --out DIR
 - Let `--strict` return nonzero unless the overall pattern status is `pass`.
 
 Write progress and errors to stderr and exactly one compact JSON summary line to stdout on success.
+
+## Generic Design CLI
+
+Use the separate design script only when an ordinary photo or illustration must become a new bead design. It does not detect or restore a native grid.
+
+```text
+design_bead_pattern.py INPUT --out DIR
+  [--board-size 52x52|78x78]
+  [--fit-mode center-square|contain|content-contain]
+  [--content-padding-cells 1..16]
+  [--clusters 4..16]
+  [--seed INT]
+  [--ink-threshold 0.01..0.5]
+  [--background auto|empty-white|bead]
+  [--preview-cell-px 4..64]
+  [--grid-cell-px 18..64]
+  [--overwrite]
+```
+
+- Keep the public design path generic. Do not add source-specific landmarks or semantic feature rules.
+- Treat the documented cell-pixel ranges as parser bounds, not a promise that every board/scale combination will render. The shared renderer also enforces a 16,000-pixel per-axis limit and a 16,000,000-total-pixel limit, and must reject an oversized combination before committing output.
+- Require an explicit supported geometry internally; expose `--board-size 52x52|78x78` and default to 78×78. Design mode does not infer a mold from the source.
+- Use `content-contain` by default to detect a non-white content box, preserve its aspect ratio, and reserve `--content-padding-cells` around it. Use `center-square` for a centered square crop or `contain` to retain the complete source with white square padding.
+- Cluster the reduced raster with a fixed seed in Lab space, protect supported neutral-dark line coverage, and map cluster centroids against the complete 221-entry MARD-compatible catalog with CIEDE2000. Do not dither or claim semantic understanding.
+- With `--background auto`, use a synthetic `.` background only when a neutral-white region is sufficiently border connected. Use `empty-white` to require that evidence or `bead` to force every position to a physical MARD-compatible code. Never treat `.` as a white bead.
+- Require `status: review` for every run. A plausible preview does not validate identity, anatomy, text, small features, color accuracy, or copyright status.
+- Prefer a new output directory. Treat `--overwrite` as the same marker-guarded replacement contract used by the restore script; never weaken its path, symlink, ancestor, or input-file protections.
+- Write errors to stderr, return `2` on invalid input or arguments, and write exactly one compact JSON summary line to stdout after a successful atomic output commit.
+- Do not store the source path or copy the source image into the output. Store only its SHA-256, width, and height.
+- Treat SHA-256 as a stable file fingerprint that can identify a known matching file, not as anonymization. A rendered design may preserve an identifiable person, likeness, text, or other sensitive visual information. Record that privacy or portrait consent was not verified and require the caller to avoid publication without the necessary consent.
+- Require the user to hold the rights needed to create and use the derivative. The tool grants no permission to reproduce, sell, publish, or redistribute copyrighted or trademarked source material.
 
 ## Board Modes
 
@@ -113,6 +147,7 @@ Keep these spaces separate:
 2. **Native content**: `content_bbox` cropped from the native canvas. Store the box as `left`, `top`, `right_exclusive`, and `bottom_exclusive` in native cell coordinates.
 3. **Board canvas**: exactly 52×52 or 78×78 cells. Copy native content cells into it one-for-one and fill only the surrounding cells with background.
 4. **Derived design canvas, when explicitly authorized**: an integer repetition of native content cells produced by the `scale` operation. This is not a second observation of the source photograph.
+5. **New design canvas**: exactly 52×52 or 78×78 zero-based cells created directly from an ordinary raster by `design_bead_pattern.py`. It is neither a native canvas nor a board placement of recovered cells.
 
 Never copy native exterior padding onto the board. During normal restoration and board placement, never interpolate, resample, split, merge, stretch, or synthesize content. The explicit `scale` operation is the sole exception and performs exact integer cell repetition only. Require `board.resampled` to remain `false` in both cases because physical-board placement is always one-to-one.
 
@@ -152,6 +187,59 @@ Produce `board.*` metadata and all five board artifacts only when board selectio
 Do not store the input path in `pattern.json` or `summary.json`. Store only source SHA-256 and pixel dimensions. Never package the source image, screenshots, private paths, or run outputs inside the skill.
 
 Every `pattern.json` native cell contains zero-based coordinates, final label and symbol, sampled raw label, next-best alternative, confidence, perturbation agreement, and a reason when topology or review handling affected it. Catalog-backed cells also contain `code`, `raw_code`, and `alternative_code`; the synthetic background uses `code: null`. Define `uncertain_cells` as exactly the non-background native cells whose final confidence is below `uncertain_threshold`.
+
+## Design Outputs
+
+Generic design mode emits exactly these artifacts:
+
+| File | Meaning |
+| --- | --- |
+| `summary.json` | Compact design summary; matches the single JSON object written to stdout. |
+| `pattern.json` | Full design manifest with source hash and dimensions, selected-board canvas metadata, method, provisional palette profile, cluster mappings, counts, every cell, review notes, rights metadata, and artifact names. |
+| `design.csv` | Selected 52×52 or 78×78 zero-based matrix of MARD-compatible codes with a `row\col` header. |
+| `palette_counts.csv` | Used code or synthetic background, screen-reference HEX value, count, and `synthetic` flag; counts sum to the selected board area. |
+| `design_preview.png` | Selected-board design rendered without grid lines. |
+| `design_grid.png` | Selected-board design rendered with cell lines and code labels. |
+| `design_transparent.png` | RGBA preview with synthetic empty cells transparent; identical coverage to the opaque preview when every position is a bead. |
+| `THIRD_PARTY_NOTICES.md` | Copied attribution required for the bundled MARD-compatible data. |
+| `DESIGN_RIGHTS_NOTICE.md` | Bilingual notice that the tool did not verify source rights and grants no commercial-copying or public-redistribution rights. |
+
+Require at least these `pattern.json` invariants:
+
+```json
+{
+  "schema_version": "design-1.0",
+  "algorithm_version": "design-1.0.0",
+  "status": "review",
+  "kind": "new-bead-pattern-design",
+  "not_restoration": true,
+  "source": {"sha256": "...", "width_px": 1200, "height_px": 1600},
+  "canvas": {
+    "columns": 78,
+    "rows": 78,
+    "board_standard": "wenzhou",
+    "board_size": 78,
+    "full_square_design": false,
+    "board_cell_count": 6084,
+    "empty_background_cells": 1200
+  },
+  "palette_profile": {
+    "id": "mard-221-compatible",
+    "code_system": "mard-221",
+    "bead_color_count": 221,
+    "provisional": true
+  },
+  "bead_count": 4884
+}
+```
+
+- Treat the numeric background and bead counts above as an illustrative 78×78 example. Require `board_cell_count == bead_count + empty_background_cells == board_size²`; set `full_square_design: true` exactly when `empty_background_cells` is zero.
+- Require `cells` to contain exactly `board_size²` entries with zero-based `row`, `col`, `symbol`, and `synthetic`; physical cells have a non-null MARD-compatible `code`, while synthetic empty cells use `code: null` and symbol `.`. Require `counts` and `palette_counts.csv` to sum to the same area.
+- Require `design_method` to disclose crop/contain geometry, downsampling, cluster count, seed, no-dithering policy, dark-line protection, and catalog matching.
+- Require `review_notes` to state that this is a new design rather than a restoration, that semantic details need inspection, and that MARD screen RGB references require physical-card confirmation.
+- Require identical structured `rights` metadata in `pattern.json` and `summary.json`, and register `DESIGN_RIGHTS_NOTICE.md` in `artifacts`. The notice must state that source rights, privacy, and portrait consent were not verified; the source image is not included; the SHA-256 is a stable file fingerprint; the design may remain identifiable; and the tool grants no commercial reproduction or public redistribution rights.
+- Do not pass a design `pattern.json` to restoration `revise`, `render`, or `scale`; those commands consume the restoration schema and provenance model.
+- Do not expect source overlays, native-grid candidates, confidence maps, or restoration board metadata from design mode. Read `background.applied_mode`, `content_bbox`, and `empty_background_cells` for design-specific empty-hole semantics.
 
 ## Board Metadata
 
@@ -262,7 +350,7 @@ F1..F25   G1..G21   H1..H23   M1..M15
 
 Reject the resource if codes are missing, duplicated, outside those nine groups, or if RGB and HEX disagree. Do not mix P/Q/R/T/Y/ZG extended-series entries into this 221-code profile.
 
-At runtime prepend one synthetic entry:
+In restore mode, prepend one synthetic entry at runtime:
 
 ```json
 {
@@ -275,7 +363,9 @@ At runtime prepend one synthetic entry:
 }
 ```
 
-Derive its RGB from the source border; the shown value is illustrative. It represents empty photographic space, not a bead. Require runtime palette length 222, exactly one synthetic background, and 221 coded bead colors.
+Derive its RGB from the source border; the shown value is illustrative. It represents empty photographic space, not a bead. Require restore-mode runtime palette length 222, exactly one synthetic background, and 221 coded bead colors.
+
+Generic design mode uses the same 221 physical codes plus the separate runtime synthetic background. It maps every non-empty design cell to a physical code and uses the synthetic entry only when `--background auto` or `empty-white` applies a supported border-connected neutral-white region. Keep these semantics distinct even when a physical designed cell looks white.
 
 Recover structure before catalog color:
 
@@ -287,7 +377,7 @@ Recover structure before catalog color:
 
 This cluster-level rule prevents yarn, melt texture, shadows, and camera noise from turning one intended bead color into many nearby purchase codes. Keep color confidence no higher than structural confidence, especially for topology-corrected cells.
 
-When this profile is used, add top-level `palette_profile` to `pattern.json` and `summary.json`. Require at least:
+When this profile is used in restore mode, add top-level `palette_profile` to `pattern.json` and `summary.json`. Require at least:
 
 ```json
 {
@@ -353,6 +443,7 @@ Never use 8-neighbor flood: diagonal corner leakage can erase an enclosed subjec
 - Set `pass` only when native grid confidence is at least `0.80`, candidate margin at least `0.08`, mean foreground-cell confidence at least `0.88`, review ratio at most `0.03`, and no warning or unresolved board review exists.
 - Set `review` when a coherent native pattern exists but any pass condition is unmet, an automatic palette or screen-RGB catalog reference remains provisional, or board `selection_status` is `review`.
 - Set `fail` when fewer than four foreground cells remain, native grid confidence is below `0.35`, more than `0.35` of foreground cells require review, or a requested board cannot contain the native content.
+- Set every generic design result to `review`; restoration confidence gates do not apply because no native grid is being recovered.
 
 Treat gates as reporting rules, not tuning targets. Do not manipulate native geometry or colors merely to obtain `pass` or fit a board.
 

@@ -1,5 +1,5 @@
 name: Feature request / 功能建议
-description: Propose an improvement that fits the existing-grid restoration scope.
+description: Propose an improvement to the restoration or review-only design workflow.
 title: "[Feature]: "
 labels: ["enhancement", "needs-triage"]
 body:
@@ -28,7 +28,7 @@ body:
         - Wenzhou board placement
         - Review, revise, or rendering
         - Documentation or installation
-        - Ordinary photo/illustration redesign (separate experimental proposal)
+        - Generic ordinary photo/illustration bead design
     validations:
       required: true
   - type: textarea
@@ -43,7 +43,7 @@ body:
     attributes:
       label: Project boundaries
       options:
-        - label: The proposal preserves uncertainty and does not silently redraw unsupported cells.
+        - label: The proposal keeps restore and design semantics separate; restoration preserves uncertainty, while design remains generic, review-only, and marked not_restoration.
           required: true
         - label: I will discuss new third-party data or palettes before copying them into the repository.
           required: true

@@ -18,7 +18,7 @@ Closes #
 - [ ] No user source images, private paths, credentials, generated outputs, or cache files are included
 - [ ] I have the right to submit every image, dataset, palette, or third-party file in this PR
 - [ ] Required license and attribution notices are included
-- [ ] This PR does not silently expand the skill from grid restoration into ordinary photo/illustration redesign
+- [ ] Restore and design remain separate: design output stays review-only and `not_restoration`, with no source-specific presets or hard-coded sample coordinates
 
 If media or third-party data is included, complete this table. Write `None` when no assets are added.
 

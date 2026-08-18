@@ -1,5 +1,5 @@
 name: Bug report / 错误报告
-description: Report a reproducible problem in restore, scale, revise, or render.
+description: Report a reproducible problem in restore, design, scale, revise, or render.
 title: "[Bug]: "
 labels: ["bug", "needs-triage"]
 body:
@@ -11,7 +11,7 @@ body:
     id: command
     attributes:
       label: Command
-      options: [restore, scale, revise, render, installation, other]
+      options: [restore, design, scale, revise, render, installation, other]
     validations:
       required: true
   - type: dropdown

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline self-test for ``restore_pattern.py``.
+"""Offline self-test for the bundled restore and independent design CLIs.
 
 The test creates a tiny deterministic, yarn-textured grid inside a temporary
 directory.  No source fixture or generated bitmap is stored in the skill.
@@ -30,6 +30,7 @@ sys.dont_write_bytecode = True
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 RESTORE_SCRIPT = SCRIPT_DIR / "restore_pattern.py"
+DESIGN_SCRIPT = SCRIPT_DIR / "design_bead_pattern.py"
 MARD_221_RESOURCE = SCRIPT_DIR.parent / "assets" / "palettes" / "mard-221-compatible.json"
 OUTPUT_MARKER_NAME = ".restore-bead-pattern-output"
 OUTPUT_MARKER_CONTENT = "restore-bead-pattern-output-v1\n"
@@ -89,6 +90,52 @@ def load_restore_module() -> ModuleType:
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+def load_design_module() -> ModuleType:
+    require(DESIGN_SCRIPT.is_file(), f"missing design script: {DESIGN_SCRIPT}")
+    spec = importlib.util.spec_from_file_location(
+        "design_bead_pattern_self_test_target", DESIGN_SCRIPT
+    )
+    require(spec is not None and spec.loader is not None, "could not load design_bead_pattern.py")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_design_contain_geometry(module: ModuleType) -> None:
+    """Contain must never allocate a source-long-side squared canvas."""
+
+    for width, height, size in (
+        (1, 50_000_000, 78),
+        (50_000_000, 1, 78),
+        (120, 160, 52),
+    ):
+        geometry = module.contain_geometry(width, height, size)
+        require(
+            (geometry["canvas_width"], geometry["canvas_height"]) == (size, size),
+            "contain geometry created a source-sized intermediate canvas",
+        )
+        require(
+            1 <= geometry["target_width"] <= size
+            and 1 <= geometry["target_height"] <= size,
+            "contain target lies outside the selected board",
+        )
+        require(
+            geometry["target_width"] == size or geometry["target_height"] == size,
+            "contain target does not use the available board extent",
+        )
+    mask = module.np.zeros((7, 11), dtype=bool)
+    mask[2:6, 3:9] = True
+    require(
+        module.boolean_mask_bbox(mask) == (3, 2, 9, 6),
+        "content-aware bbox axis reduction returned the wrong half-open box",
+    )
+    require(
+        module.boolean_mask_bbox(module.np.zeros((7, 11), dtype=bool)) is None,
+        "content-aware bbox did not report an empty mask",
+    )
 
 
 def expected_mard_221_codes() -> set[str]:
@@ -903,6 +950,35 @@ def make_synthetic_source(path: Path) -> list[list[str]]:
     # alter the intended grid or introduce a stored fixture.
     image.filter(ImageFilter.GaussianBlur(radius=0.28)).save(path, format="PNG")
     return matrix
+
+
+def make_ordinary_design_source(path: Path) -> None:
+    """Create a deterministic illustration with no pre-existing logical grid."""
+
+    try:
+        from PIL import Image, ImageDraw
+    except ImportError as exc:  # pragma: no cover - same dependency as target
+        raise SelfTestFailure("design self-test requires Pillow") from exc
+    image = Image.new("RGB", (120, 160), (255, 255, 255))
+    draw = ImageDraw.Draw(image)
+    draw.ellipse((25, 18, 95, 88), fill=(244, 190, 45), outline=(20, 20, 20), width=5)
+    draw.rectangle((42, 82, 78, 143), fill=(65, 155, 205), outline=(20, 20, 20), width=5)
+    draw.ellipse((42, 46, 52, 56), fill=(10, 10, 10))
+    draw.ellipse((68, 46, 78, 56), fill=(10, 10, 10))
+    image.save(path, format="PNG")
+
+
+def make_flat_rgba_design_source(path: Path) -> None:
+    """Create a two-color alpha image whose hidden transparent RGB is black."""
+
+    try:
+        from PIL import Image, ImageDraw
+    except ImportError as exc:  # pragma: no cover
+        raise SelfTestFailure("design alpha self-test requires Pillow") from exc
+    image = Image.new("RGBA", (78, 78), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(image)
+    draw.rectangle((20, 15, 58, 63), fill=(235, 48, 70, 255))
+    image.save(path, format="PNG")
 
 
 def cli_command(
@@ -2219,6 +2295,351 @@ def assert_output_overwrite_guards(
     require(edits.is_file(), "edits-ancestor guard deleted the edits CSV")
 
 
+def assert_design_cli(root: Path) -> None:
+    """Exercise the independent ordinary-image design boundary end to end."""
+
+    require(DESIGN_SCRIPT.is_file(), f"missing design script: {DESIGN_SCRIPT}")
+    source = root / "ordinary-illustration.png"
+    make_ordinary_design_source(source)
+
+    def command(
+        output: Path,
+        *,
+        board_size: str | None = None,
+        background: str = "empty-white",
+        overwrite: bool = False,
+    ) -> list[str]:
+        result = [
+            sys.executable,
+            str(DESIGN_SCRIPT),
+            str(source),
+            "--out",
+            str(output),
+            "--clusters",
+            "8",
+            "--seed",
+            "7",
+            "--background",
+            background,
+            "--preview-cell-px",
+            "8",
+            "--grid-cell-px",
+            "18",
+        ]
+        if board_size is not None:
+            result.extend(("--board-size", board_size))
+        if overwrite:
+            result.append("--overwrite")
+        return result
+
+    empty_output = root / "design-empty-78"
+    completed = run_cli(command(empty_output), "ordinary-image design CLI")
+    stdout_lines = [line for line in completed.stdout.splitlines() if line.strip()]
+    require(len(stdout_lines) == 1, "design CLI did not emit exactly one JSON summary line")
+    stdout_summary = json.loads(stdout_lines[0])
+    pattern = json.loads((empty_output / "pattern.json").read_text(encoding="utf-8"))
+    summary = json.loads((empty_output / "summary.json").read_text(encoding="utf-8"))
+    require(stdout_summary == summary, "design stdout summary disagrees with summary.json")
+    require(pattern.get("schema_version") == "design-1.0", "design schema is incorrect")
+    require(pattern.get("algorithm_version") == "design-1.0.0", "design algorithm version is incorrect")
+    require(pattern.get("kind") == "new-bead-pattern-design", "design kind is not explicit")
+    require(pattern.get("not_restoration") is True, "ordinary image was presented as restoration")
+    require(pattern.get("status") == "review", "new design bypassed visual review status")
+    canvas = pattern.get("canvas", {})
+    require(
+        canvas.get("board_size") == canvas.get("rows") == canvas.get("columns") == 78,
+        "default design board is not 78x78",
+    )
+    require(canvas.get("full_square_design") is False, "empty design was marked as a full bead board")
+    background = pattern.get("background", {})
+    require(
+        background.get("synthetic") is True
+        and background.get("symbol") == "."
+        and background.get("code") is None
+        and background.get("applied_mode") == "synthetic-empty",
+        "empty-white background is not an explicit synthetic sentinel",
+    )
+    require(0 < int(pattern.get("bead_count", 0)) < 78 * 78, "empty design bead_count is invalid")
+    require(
+        int(pattern.get("counts", {}).get("background", 0))
+        == 78 * 78 - int(pattern["bead_count"]),
+        "empty design background count disagrees with bead_count",
+    )
+    require(1 <= int(pattern.get("used_color_count", 0)) <= 9, "design used an unexpected number of MARD colors")
+    profile = pattern.get("palette_profile", {})
+    require(
+        profile.get("id") == "mard-221-compatible"
+        and profile.get("bead_color_count") == 221
+        and profile.get("provisional") is True,
+        "design did not use the bundled provisional MARD 221 profile",
+    )
+    rights = pattern.get("rights", {})
+    require(
+        rights.get("rights_or_authorization_verified_by_tool") is False
+        and rights.get("privacy_or_portrait_consent_verified_by_tool") is False
+        and rights.get("output_may_remain_identifiable") is True
+        and rights.get("commercial_copying_or_public_redistribution_rights_granted_by_tool") is False
+        and rights.get("source_image_included") is False,
+        "design rights boundary is incomplete",
+    )
+    required_artifacts = {
+        "DESIGN_RIGHTS_NOTICE.md",
+        "THIRD_PARTY_NOTICES.md",
+        "design.csv",
+        "design_grid.png",
+        "design_preview.png",
+        "design_transparent.png",
+        "palette_counts.csv",
+        "pattern.json",
+        "summary.json",
+    }
+    require(set(pattern.get("artifacts", [])) == required_artifacts, "design artifact registry is incomplete")
+    require(all((empty_output / name).is_file() for name in required_artifacts), "design omitted an artifact")
+    require(pattern.get("rights") == summary.get("rights"), "summary lost design rights metadata")
+    rights_notice = (empty_output / "DESIGN_RIGHTS_NOTICE.md").read_text(encoding="utf-8")
+    require(
+        "does not verify copyright" in rights_notice
+        and "privacy, portrait or publicity rights" in rights_notice
+        and "may remain identifiable" in rights_notice
+        and "not an anonymity guarantee" in rights_notice
+        and "grant rights to commercially reproduce" in rights_notice
+        and "source image is not included" in rights_notice,
+        "design rights notice omitted a required limitation",
+    )
+    third_party = (empty_output / "THIRD_PARTY_NOTICES.md").read_text(encoding="utf-8")
+    require(
+        "Copyright (c) 2026 Jett-Wu" in third_party
+        and "Permission is hereby granted" in third_party,
+        "design dropped the bundled MARD license notice",
+    )
+    cells = pattern.get("cells", [])
+    require(len(cells) == 78 * 78, "design cells do not cover the 78x78 board")
+    coordinates = {(cell.get("row"), cell.get("col")) for cell in cells}
+    require(len(coordinates) == 78 * 78, "design cells contain duplicate coordinates")
+    empty_cells = [cell for cell in cells if cell.get("synthetic")]
+    require(
+        bool(empty_cells)
+        and all(cell.get("code") is None and cell.get("symbol") == "." for cell in empty_cells),
+        "synthetic design cells are not code-free dots",
+    )
+    physical_codes = expected_mard_221_codes()
+    require(
+        all(cell.get("code") in physical_codes for cell in cells if not cell.get("synthetic")),
+        "design emitted a code outside bundled MARD 221",
+    )
+    cell_counts = Counter(
+        "background" if cell.get("synthetic") else str(cell.get("code"))
+        for cell in cells
+    )
+    require(dict(cell_counts) == pattern.get("counts"), "design counts disagree with cells")
+    with (empty_output / "palette_counts.csv").open(
+        encoding="utf-8", newline=""
+    ) as handle:
+        palette_count_rows = list(csv.DictReader(handle))
+    require(
+        {row["code"]: int(row["count"]) for row in palette_count_rows}
+        == pattern.get("counts"),
+        "palette_counts.csv disagrees with design manifest",
+    )
+    matrix = read_csv_matrix(empty_output / "design.csv", 78, 78)
+    require(
+        matrix == [[cell["symbol"] for cell in cells[row * 78 : (row + 1) * 78]] for row in range(78)],
+        "design.csv disagrees with pattern.json",
+    )
+    source_metadata = pattern.get("source", {})
+    require(set(source_metadata) == {"sha256", "width_px", "height_px"}, "design source metadata leaked a path")
+    leaked = completed.stdout + completed.stderr + json.dumps(pattern, ensure_ascii=False)
+    require(str(source.resolve()) not in leaked, "design output leaked the absolute source path")
+    require(not (empty_output / "source_grid_overlay.png").exists(), "design emitted a restoration overlay")
+    assert_output_marker(empty_output)
+
+    try:
+        from PIL import Image
+    except ImportError as exc:  # pragma: no cover
+        raise SelfTestFailure("design alpha test requires Pillow") from exc
+    alpha_extrema = (
+        Image.open(empty_output / "design_transparent.png")
+        .convert("RGBA")
+        .getchannel("A")
+        .getextrema()
+    )
+    require(alpha_extrema == (0, 255), "empty design transparent PNG lacks clear/opaque pixels")
+    require(
+        Image.open(empty_output / "design_grid.png").size == (78 * 18, 78 * 18),
+        "78x78 code grid dimensions disagree with --grid-cell-px 18",
+    )
+
+    baseline = {
+        name: (empty_output / name).read_bytes()
+        for name in required_artifacts
+    }
+    run_cli(command(empty_output, overwrite=True), "deterministic design overwrite")
+    assert_output_marker(empty_output)
+    for name, expected in baseline.items():
+        require(
+            (empty_output / name).read_bytes() == expected,
+            f"fixed-seed design overwrite changed artifact {name}",
+        )
+
+    unowned = root / "design-unowned-output"
+    unowned.mkdir()
+    sentinel = unowned / "preserve.txt"
+    sentinel.write_text("preserve", encoding="utf-8")
+    run_cli_failure(
+        command(unowned, overwrite=True),
+        "design unowned overwrite guard",
+        expected_stderr="not owned by restore-bead-pattern",
+    )
+    require(sentinel.read_text(encoding="utf-8") == "preserve", "design overwrite deleted unowned data")
+
+    flat_source = root / "flat-transparent-illustration.png"
+    make_flat_rgba_design_source(flat_source)
+    flat_output = root / "design-flat-alpha-auto"
+    flat_completed = run_cli(
+        [
+            sys.executable,
+            str(DESIGN_SCRIPT),
+            str(flat_source),
+            "--out",
+            str(flat_output),
+            "--fit-mode",
+            "center-square",
+            "--preview-cell-px",
+            "8",
+            "--grid-cell-px",
+            "18",
+        ],
+        "flat RGBA default design CLI",
+    )
+    flat_pattern = json.loads((flat_output / "pattern.json").read_text(encoding="utf-8"))
+    require(
+        flat_pattern.get("canvas", {}).get("board_size") == 78
+        and flat_pattern.get("design_method", {}).get("logical_color_clusters") == 12,
+        "flat design did not exercise the public defaults",
+    )
+    require(
+        1 <= int(flat_pattern.get("design_method", {}).get("effective_color_clusters", 0)) <= 3,
+        "flat design did not compact empty k-means clusters",
+    )
+    require(
+        flat_pattern.get("background", {}).get("requested_mode") == "auto"
+        and flat_pattern.get("background", {}).get("synthetic") is True
+        and int(flat_pattern.get("counts", {}).get("background", 0)) > 0,
+        "default auto mode did not treat transparent source area as empty",
+    )
+    require(
+        int(flat_pattern.get("counts", {}).get("H7", 0)) == 0,
+        "hidden transparent RGB or saturated red was turned into black beads",
+    )
+    require(
+        str(flat_source.resolve())
+        not in (flat_completed.stdout + flat_completed.stderr + json.dumps(flat_pattern)),
+        "flat RGBA design leaked its source path",
+    )
+    assert_output_marker(flat_output)
+
+    unlabeled_grid_output = root / "design-grid-too-small"
+    run_cli_failure(
+        [
+            sys.executable,
+            str(DESIGN_SCRIPT),
+            str(source),
+            "--out",
+            str(unlabeled_grid_output),
+            "--grid-cell-px",
+            "17",
+        ],
+        "design code-label grid minimum",
+        expected_stderr="--grid-cell-px must be between 18 and 64",
+    )
+    require(not unlabeled_grid_output.exists(), "unlabeled design grid wrote output")
+
+    oversized_output = root / "design-render-too-large"
+    run_cli_failure(
+        [
+            sys.executable,
+            str(DESIGN_SCRIPT),
+            str(source),
+            "--out",
+            str(oversized_output),
+            "--clusters",
+            "8",
+            "--background",
+            "empty-white",
+            "--preview-cell-px",
+            "8",
+            "--grid-cell-px",
+            "64",
+        ],
+        "design render pixel safety limit",
+        expected_stderr="16,000,000 total pixels",
+    )
+    require(not oversized_output.exists(), "oversized design render left a partial output")
+    require(
+        not list(root.glob(".design-render-too-large.staging-*")),
+        "oversized design render left a staging directory",
+    )
+
+    bead_output = root / "design-bead-52"
+    bead_completed = run_cli(
+        command(bead_output, board_size="52x52", background="bead"),
+        "52x52 full-bead design CLI",
+    )
+    bead_pattern = json.loads((bead_output / "pattern.json").read_text(encoding="utf-8"))
+    bead_canvas = bead_pattern.get("canvas", {})
+    require(
+        bead_canvas.get("board_size") == bead_canvas.get("rows") == bead_canvas.get("columns") == 52,
+        "explicit design board is not 52x52",
+    )
+    require(bead_canvas.get("full_square_design") is True, "bead mode did not fill the full board")
+    require(bead_pattern.get("bead_count") == 52 * 52, "bead mode bead_count is not full board area")
+    require("background" not in bead_pattern.get("counts", {}), "bead mode emitted synthetic background counts")
+    require(
+        bead_pattern.get("background", {}).get("synthetic") is False
+        and bead_pattern.get("background", {}).get("applied_mode") == "physical-bead-board",
+        "bead mode background metadata is incorrect",
+    )
+    require(
+        len(bead_pattern.get("cells", [])) == 52 * 52
+        and all(
+            not cell.get("synthetic") and cell.get("code") in physical_codes
+            for cell in bead_pattern["cells"]
+        ),
+        "52x52 bead mode contains empty or non-MARD cells",
+    )
+    require(
+        set(bead_pattern.get("artifacts", [])) == required_artifacts
+        and all((bead_output / name).is_file() for name in required_artifacts),
+        "52x52 design omitted a rights, license, data, or render artifact",
+    )
+    require(
+        bead_pattern.get("rights", {}).get("source_image_included") is False,
+        "52x52 design lost rights metadata",
+    )
+    bead_matrix = read_csv_matrix(bead_output / "design.csv", 52, 52)
+    require(
+        bead_matrix
+        == [
+            [cell["symbol"] for cell in bead_pattern["cells"][row * 52 : (row + 1) * 52]]
+            for row in range(52)
+        ],
+        "52x52 design.csv disagrees with pattern.json",
+    )
+    bead_alpha_extrema = (
+        Image.open(bead_output / "design_transparent.png")
+        .convert("RGBA")
+        .getchannel("A")
+        .getextrema()
+    )
+    require(bead_alpha_extrema == (255, 255), "bead mode transparent PNG contains empty pixels")
+    require(
+        Image.open(bead_output / "design_grid.png").size == (52 * 18, 52 * 18),
+        "52x52 code grid dimensions disagree with --grid-cell-px 18",
+    )
+    require(str(source.resolve()) not in (bead_completed.stdout + bead_completed.stderr + json.dumps(bead_pattern)), "52x52 design leaked source path")
+    assert_output_marker(bead_output)
+
+
 def test_cli() -> None:
     with tempfile.TemporaryDirectory(prefix="restore-bead-self-test-") as temporary:
         root = Path(temporary)
@@ -2263,6 +2684,7 @@ def test_cli() -> None:
         mard_completed = run_cli(mard_command, "MARD 221 restore CLI")
         assert_mard_cli_contract(source, mard_output, mard_completed)
         assert_mard_revise_render_roundtrip(root, mard_output)
+        assert_design_cli(root)
 
         successful_outputs = sorted(
             {path.parent for path in root.rglob("summary.json")},
@@ -2276,6 +2698,7 @@ def test_cli() -> None:
 def main() -> int:
     try:
         module = load_restore_module()
+        design_module = load_design_module()
         test_mard_221_resource_contract()
         test_mard_builtin_loader(module)
         test_input_limits_and_palette_text_safety(module)
@@ -2286,6 +2709,7 @@ def main() -> int:
         test_four_connected_light_topology(module)
         test_wenzhou_mold_geometry(module)
         test_wenzhou_mold_selection(module)
+        test_design_contain_geometry(design_module)
         test_cli()
     except (SelfTestFailure, OSError, ValueError, json.JSONDecodeError, subprocess.TimeoutExpired) as exc:
         print(f"restore-bead-pattern self-test: FAIL: {exc}", file=sys.stderr)
