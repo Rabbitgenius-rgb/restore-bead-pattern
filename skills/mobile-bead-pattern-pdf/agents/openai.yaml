@@ -1,0 +1,4 @@
+interface:
+  display_name: "手机版拼豆 PDF 分区"
+  short_description: "把已有矢量色号拼豆PDF重排成手机可读分区图纸"
+  default_prompt: "使用 $mobile-bead-pattern-pdf 保留原始格子、色号和数量，将这份矢量拼豆 PDF 重排为带目录跳转的手机分区版。"

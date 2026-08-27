@@ -1,12 +1,15 @@
 # restore-bead-pattern
 
-一个用于 **Codex** 的开源 Skill，也可以作为本地命令行工具使用。它从已经具有离散方格结构的拼豆、十字绣、簇绒、刺绣或像素作品照片中恢复原生逻辑网格，导出可复核的 PNG、CSV 与 JSON 图纸。
+一个面向 **Codex** 和本地命令行的开源拼豆工具仓库，现在包含两个边界清晰的 Skill：
 
-> This project restores a grid that already exists in the source. It is not a general photo-to-pixel-art converter.
+- `restore-bead-pattern`：从已经具有离散方格结构的拼豆、十字绣、簇绒、刺绣或像素作品照片中恢复原生逻辑网格；
+- `mobile-bead-pattern-pdf`：不改变施工数据，把已有矢量格子和逐格色号的拼豆 PDF 重排成手机可读的分区施工版。
 
-当前算法版本：`0.4.1`；输出 Schema：`1.2`。
+> This project either restores a grid that already exists in an image or reformats an already coded vector PDF. Neither workflow is a general photo-to-pixel-art converter.
 
-> **macOS 版本说明**：当前公开发行版以 macOS 本地流程为主要使用环境；核心 Python CLI 同时通过 Ubuntu 上的 Python 3.10–3.12 与 macOS 14 / Python 3.12 CI。Windows 尚未验证。
+当前复原算法版本：`0.4.1`；输出 Schema：`1.2`。手机 PDF 算法版本：`mobile-pdf-1.0.0`；输出 Schema：`mobile-pdf-1.0`。
+
+> **macOS 版本说明**：当前公开发行版以 macOS 本地流程为主要使用环境；两个 Python CLI 同时通过 Ubuntu 上的 Python 3.10–3.12 与 macOS 14 / Python 3.12 CI。Windows 尚未验证。
 
 ## macOS 版本示例
 
@@ -48,14 +51,19 @@
 - 将恢复后的内容按 1 格对 1 孔放入 52×52 或 78×78 温州式模具预设。
 - 对已恢复图纸进行 2–8 倍整数格复制，不从照片纹理中虚构新细节。
 - 支持 `restore`、`scale`、`revise`、`render` 四个命令。
+- 自动扫描 PDF 页面并找到最强的完整矢量方格，支持非 52 整倍尺寸。
+- 把矢量拼豆 PDF 分成最大 52×52 分区和最宽 26 列的手机施工页，自动省略纯空切片。
+- 在手机 PDF 中保留完整色号、数量、绝对行列坐标、5 格导线、色表和内部跳转。
 
 ## 不适用范围
 
-不要用它把普通人物照片、插画或风景重新设计成像素画。输入必须已经包含可恢复的规则方格，例如清晰拼豆、针脚块、织物格或阶梯状像素边缘。旋转、明显透视、严重遮挡、多主体及缺乏重复格距证据的图片可能返回 `review` 或 `fail`。
+`restore-bead-pattern` 不用于把普通人物照片、插画或风景重新设计成像素画。输入必须已经包含可恢复的规则方格。
+
+`mobile-bead-pattern-pdf` 不会从扫描件、截图或栅格图像推断格子。PDF 必须已包含完整矢量方格、对齐的填色格和形如 `H2` / `M15` 的逐格编码；缺失这些证据时会直接失败，不会用 OCR 或猜测补齐。
 
 ## 安装
 
-需要 Python 3.10–3.12、NumPy 和 Pillow。
+需要 Python 3.10–3.12。复原 Skill 使用 NumPy 和 Pillow；手机 PDF Skill 使用 pdfplumber、ReportLab 和 pypdf。
 
 ```bash
 git clone https://github.com/Rabbitgenius-rgb/restore-bead-pattern.git
@@ -63,6 +71,7 @@ cd restore-bead-pattern
 python3 -m pip install -r requirements.txt
 mkdir -p ~/.codex/skills
 cp -R skills/restore-bead-pattern ~/.codex/skills/
+cp -R skills/mobile-bead-pattern-pdf ~/.codex/skills/
 ```
 
 也可以不安装 Skill，直接调用仓库中的脚本。
@@ -98,6 +107,15 @@ python3 skills/restore-bead-pattern/scripts/restore_pattern.py scale \
 完整参数与 `revise`、`render` 契约见
 [`skills/restore-bead-pattern/references/contracts.md`](skills/restore-bead-pattern/references/contracts.md)。
 
+把已有矢量色号拼豆 PDF 重排为手机分区版：
+
+```bash
+python3 skills/mobile-bead-pattern-pdf/scripts/mobile_bead_pdf.py input.pdf \
+  --output output-mobile.pdf
+```
+
+脚本会保留源 PDF，生成独立文件，并在 stdout 输出一行 JSON，包含网格、豆数、色数、分区、页数、链接数和 SHA-256 校验结果。
+
 ## 输出与状态
 
 主要文件包括：
@@ -120,10 +138,11 @@ python3 skills/restore-bead-pattern/scripts/restore_pattern.py scale \
 ## 安全与隐私
 
 - 处理完全在本地进行，生产脚本不联网。
+- 手机 PDF Skill 不会把源 PDF 路径写入输出元数据，默认拒绝覆盖已有输出；显式 `--overwrite` 也只能替换带有本工具元数据标记的 PDF，并且永远拒绝源文件与输出为同一路径。
 - `pattern.json` 仅记录源文件 SHA-256 与尺寸，不记录绝对路径。
 - `source_grid_overlay.png`、`candidates.png` 和 `board_source_overlay.png` 含有源图像素，可能仍属于敏感或受版权保护内容；不要默认提交到公开仓库。
 - 错误日志可能显示调用者提供的本地路径。
-- `--overwrite` 仅允许替换由本工具创建并带有安全标记的输出目录；对主目录、当前目录、Skill 目录、符号链接或输入文件祖先目录会拒绝执行。
+- 图像复原 Skill 的 `--overwrite` 仅允许替换由该 Skill 创建并带有安全标记的输出目录；对主目录、当前目录、Skill 目录、符号链接或输入文件祖先目录会拒绝执行。
 - 使用者应确保拥有处理和分享输入、输出的权利。
 
 ## MARD-compatible 色表说明
@@ -143,10 +162,12 @@ code/HEX 数据依据 Jett-Wu/Perler_Beads_Generator 固定提交中的 MIT 数�
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python3 \
   skills/restore-bead-pattern/scripts/self_test.py
+PYTHONDONTWRITEBYTECODE=1 python3 \
+  skills/mobile-bead-pattern-pdf/scripts/self_test.py
 python3 tests/validate_release.py
 ```
 
-自测使用运行时生成的合成纹理图，不包含用户照片或私有 fixture。PNG 的逐字节结果可能随 Pillow 版本变化，因此 CI 主要验证结构、计数、拓扑与契约。
+两个自测都在运行时生成无第三方素材的确定性 fixture，不提交用户照片、用户 PDF 或私有 fixture。PDF 自测额外验证非 52 整倍分区、空切片省略、396×792 页面和内部链接。
 
 ## 许可证
 

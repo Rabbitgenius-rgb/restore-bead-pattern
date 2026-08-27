@@ -8,19 +8,27 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skills" / "restore-bead-pattern"
 EXPECTED_SKILL_FILES = {
-    "SKILL.md",
-    "LICENSE.txt",
-    "THIRD_PARTY_NOTICES.md",
-    "agents/openai.yaml",
-    "assets/palettes/mard-221-compatible.json",
-    "references/contracts.md",
-    "scripts/grid_estimator.py",
-    "scripts/restore_pattern.py",
-    "scripts/self_test.py",
-    "scripts/wenzhou_mold.py",
-    "third_party/Jett-Wu-MIT.txt",
+    "restore-bead-pattern": {
+        "SKILL.md",
+        "LICENSE.txt",
+        "THIRD_PARTY_NOTICES.md",
+        "agents/openai.yaml",
+        "assets/palettes/mard-221-compatible.json",
+        "references/contracts.md",
+        "scripts/grid_estimator.py",
+        "scripts/restore_pattern.py",
+        "scripts/self_test.py",
+        "scripts/wenzhou_mold.py",
+        "third_party/Jett-Wu-MIT.txt",
+    },
+    "mobile-bead-pattern-pdf": {
+        "SKILL.md",
+        "LICENSE.txt",
+        "agents/openai.yaml",
+        "scripts/mobile_bead_pdf.py",
+        "scripts/self_test.py",
+    },
 }
 PRIVATE_PATTERNS = (
     b"/Users/",
@@ -53,36 +61,41 @@ def fail(message: str) -> None:
 
 
 def main() -> None:
-    if not SKILL.is_dir():
-        fail("missing installable skill directory")
+    for skill_name, expected_files in EXPECTED_SKILL_FILES.items():
+        skill = ROOT / "skills" / skill_name
+        if not skill.is_dir():
+            fail(f"missing installable skill directory: {skill_name}")
 
-    actual = {
-        path.relative_to(SKILL).as_posix()
-        for path in SKILL.rglob("*")
-        if path.is_file()
-    }
-    if actual != EXPECTED_SKILL_FILES:
-        fail(f"skill allowlist mismatch: missing={sorted(EXPECTED_SKILL_FILES - actual)}, extra={sorted(actual - EXPECTED_SKILL_FILES)}")
+        actual = {
+            path.relative_to(skill).as_posix()
+            for path in skill.rglob("*")
+            if path.is_file()
+        }
+        if actual != expected_files:
+            fail(
+                f"{skill_name} allowlist mismatch: "
+                f"missing={sorted(expected_files - actual)}, extra={sorted(actual - expected_files)}"
+            )
 
-    skill_text = (SKILL / "SKILL.md").read_text(encoding="utf-8")
-    match = re.match(r"\A---\s*\n(.*?)\n---\s*\n", skill_text, flags=re.DOTALL)
-    if not match:
-        fail("SKILL.md has no valid frontmatter block")
-    frontmatter: dict[str, str] = {}
-    for line in match.group(1).splitlines():
-        if not line.strip():
-            continue
-        if ":" not in line:
-            fail("SKILL.md frontmatter contains a malformed line")
-        key, value = line.split(":", 1)
-        key, value = key.strip(), value.strip()
-        if not key or not value or key in frontmatter:
-            fail("SKILL.md frontmatter contains a blank or duplicate key")
-        frontmatter[key] = value.strip('"\'')
-    if set(frontmatter) != {"name", "description"}:
-        fail("SKILL.md frontmatter must contain only name and description")
-    if frontmatter["name"] != SKILL.name:
-        fail("skill name does not match its directory")
+        skill_text = (skill / "SKILL.md").read_text(encoding="utf-8")
+        match = re.match(r"\A---\s*\n(.*?)\n---\s*\n", skill_text, flags=re.DOTALL)
+        if not match:
+            fail(f"{skill_name}/SKILL.md has no valid frontmatter block")
+        frontmatter: dict[str, str] = {}
+        for line in match.group(1).splitlines():
+            if not line.strip():
+                continue
+            if ":" not in line:
+                fail(f"{skill_name}/SKILL.md frontmatter contains a malformed line")
+            key, value = line.split(":", 1)
+            key, value = key.strip(), value.strip()
+            if not key or not value or key in frontmatter:
+                fail(f"{skill_name}/SKILL.md frontmatter contains a blank or duplicate key")
+            frontmatter[key] = value.strip('"\'')
+        if set(frontmatter) != {"name", "description"}:
+            fail(f"{skill_name}/SKILL.md frontmatter must contain only name and description")
+        if frontmatter["name"] != skill.name:
+            fail(f"{skill_name} frontmatter name does not match its directory")
 
     missing_community = sorted(
         relative for relative in EXPECTED_COMMUNITY_FILES if not (ROOT / relative).is_file()
@@ -102,7 +115,8 @@ def main() -> None:
             if pattern in data:
                 fail(f"private path pattern {pattern!r} found in {path.relative_to(ROOT)}")
 
-    upstream_license = (SKILL / "third_party" / "Jett-Wu-MIT.txt").read_text(encoding="utf-8")
+    restore_skill = ROOT / "skills" / "restore-bead-pattern"
+    upstream_license = (restore_skill / "third_party" / "Jett-Wu-MIT.txt").read_text(encoding="utf-8")
     if "Copyright (c) 2026 Jett-Wu" not in upstream_license or "MIT License" not in upstream_license:
         fail("upstream palette license notice is incomplete")
 
@@ -126,7 +140,7 @@ def main() -> None:
         if relative not in attribution or expected_sha not in attribution:
             fail(f"media attribution is incomplete: {relative}")
 
-    print("restore-bead-pattern release validation: PASS")
+    print("restore-bead-pattern repository validation: PASS")
 
 
 if __name__ == "__main__":

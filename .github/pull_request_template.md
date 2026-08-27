@@ -9,6 +9,7 @@ Closes #
 ## Validation / 验证
 
 - [ ] `PYTHONDONTWRITEBYTECODE=1 python skills/restore-bead-pattern/scripts/self_test.py`
+- [ ] `PYTHONDONTWRITEBYTECODE=1 python skills/mobile-bead-pattern-pdf/scripts/self_test.py`
 - [ ] `python tests/validate_release.py`
 - [ ] `git diff --check`
 - [ ] Added or updated deterministic tests when behavior changed
@@ -18,7 +19,7 @@ Closes #
 - [ ] No user source images, private paths, credentials, generated outputs, or cache files are included
 - [ ] I have the right to submit every image, dataset, palette, or third-party file in this PR
 - [ ] Required license and attribution notices are included
-- [ ] This PR does not silently expand the skill from grid restoration into ordinary photo/illustration redesign
+- [ ] This PR does not silently expand either Skill into ordinary photo/illustration redesign or raster/OCR inference
 
 If media or third-party data is included, complete this table. Write `None` when no assets are added.
 

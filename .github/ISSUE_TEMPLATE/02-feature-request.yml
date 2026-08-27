@@ -1,5 +1,5 @@
 name: Feature request / 功能建议
-description: Propose an improvement that fits the existing-grid restoration scope.
+description: Propose an improvement that fits either supported existing-grid workflow.
 title: "[Feature]: "
 labels: ["enhancement", "needs-triage"]
 body:
@@ -27,6 +27,7 @@ body:
         - Palette or color matching
         - Wenzhou board placement
         - Review, revise, or rendering
+        - Vector PDF parsing or mobile construction layout
         - Documentation or installation
         - Ordinary photo/illustration redesign (separate experimental proposal)
     validations:
@@ -44,6 +45,8 @@ body:
       label: Project boundaries
       options:
         - label: The proposal preserves uncertainty and does not silently redraw unsupported cells.
+          required: true
+        - label: The proposal does not use OCR or semantic inference to make an unsupported raster PDF pass.
           required: true
         - label: I will discuss new third-party data or palettes before copying them into the repository.
           required: true
