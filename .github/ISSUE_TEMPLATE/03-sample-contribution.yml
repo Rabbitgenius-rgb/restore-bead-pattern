@@ -1,5 +1,5 @@
 name: Sample or fixture contribution / 样本贡献
-description: Offer a safely licensed image, matrix, or measurement for testing.
+description: Offer a safely licensed image, vector PDF, matrix, or measurement for testing.
 title: "[Sample]: "
 labels: ["sample-data", "needs-triage"]
 body:
@@ -9,7 +9,9 @@ body:
       label: Contribution type
       options:
         - Programmatically generated synthetic fixture
+        - Programmatically generated vector PDF fixture
         - Original image and manually reviewed matrix
+        - Original vector PDF and manually reviewed cell map
         - CC0 or Public Domain image
         - CC BY image with attribution
         - Physical mold measurement
@@ -34,7 +36,7 @@ body:
     id: expected
     attributes:
       label: Expected result or annotation method
-      description: Describe grid size, known cells, measurements, or how ground truth was produced.
+      description: Describe grid size, known cells, source page, measurements, or how ground truth was produced.
     validations:
       required: true
   - type: checkboxes

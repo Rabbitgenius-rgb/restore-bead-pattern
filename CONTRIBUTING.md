@@ -6,11 +6,12 @@ Thank you for contributing. Non-code contributions—testing, documentation, rep
 
 ## 项目边界
 
-本仓库恢复**源图中已经存在**的离散方格。它不负责把普通照片或插画重新设计成像素画。提交前请保持以下边界：
+本仓库包含两个边界清晰的 Skill：`restore-bead-pattern` 恢复**源图中已经存在**的离散方格；`mobile-bead-pattern-pdf` 将**已经带有格子与色号**的矢量 PDF 重排为手机易读施工版。它们都不负责把普通照片或插画重新设计成像素画。提交前请保持以下边界：
 
 - 恢复原生网格，不凭语义重画角色；
 - 保留不确定性，不为了“更像”而修改无证据格子；
 - 模具、色卡和原生网格是相互独立的概念；
+- 手机版 PDF 只重排可验证的原有格子、色号与坐标，不通过 OCR 或语义推断补图；
 - 普通图片转新拼豆设计属于另一个实验方向，先在 Discussion 提案，不要直接混入恢复流程。
 
 ## 可以怎样参与
@@ -19,14 +20,14 @@ Thank you for contributing. Non-code contributions—testing, documentation, rep
 - **文档**：改进中文说明、增加英文翻译、补充无障碍文本；
 - **测试数据**：贡献本人拥有版权或明确开放许可的样本及预期矩阵；
 - **材料核验**：记录实体模具尺寸或商家色卡差异，但不要复制无再分发许可的完整色卡；
-- **Python / CV**：网格估计、旋转/透视处理、拓扑、色彩匹配、鲁棒性测试；
+- **Python / CV / PDF**：网格估计、旋转/透视处理、拓扑、色彩匹配、矢量 PDF 解析、手机排版、无障碍与鲁棒性测试；
 - **Issue 整理**：复现问题、补充环境信息、确认重复报告。
 
 优先从 [`good first issue`](https://github.com/Rabbitgenius-rgb/restore-bead-pattern/labels/good%20first%20issue) 或 [`help wanted`](https://github.com/Rabbitgenius-rgb/restore-bead-pattern/labels/help%20wanted) 开始。领取任务前先留言说明计划，避免重复劳动。
 
 ## 本地开发
 
-需要 Python 3.10–3.12、NumPy 和 Pillow。
+需要 Python 3.10–3.12。完整依赖包括 NumPy、Pillow、pdfplumber、pypdf 与 ReportLab，统一由 `requirements.txt` 安装。
 
 ```bash
 git clone https://github.com/Rabbitgenius-rgb/restore-bead-pattern.git
@@ -41,6 +42,8 @@ python -m pip install -r requirements.txt
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python \
   skills/restore-bead-pattern/scripts/self_test.py
+PYTHONDONTWRITEBYTECODE=1 python \
+  skills/mobile-bead-pattern-pdf/scripts/self_test.py
 python tests/validate_release.py
 ```
 
@@ -56,7 +59,7 @@ git diff --check
 
 请使用 Bug Report 表单，并提供：
 
-- 操作系统、芯片架构、Python/NumPy/Pillow 版本；
+- 操作系统、芯片架构、Python 版本，以及与问题相关的 NumPy/Pillow 或 pdfplumber/pypdf/ReportLab 版本；
 - 完整命令（删除用户名、绝对路径和令牌）；
 - stdout 单行摘要与必要的 stderr；
 - 预期结果和实际结果；
@@ -84,7 +87,7 @@ git diff --check
 
 ## 代码要求
 
-- 生产代码必须保持离线，不上传用户图片；
+- 生产代码必须保持离线，不上传用户图片或 PDF；
 - 不使用 `shell=True`、`eval`、`pickle` 或隐式网络请求；
 - 文件写入应采用暂存目录和原子提交；
 - 保持 `--overwrite` 所有权标记与受保护路径检查；

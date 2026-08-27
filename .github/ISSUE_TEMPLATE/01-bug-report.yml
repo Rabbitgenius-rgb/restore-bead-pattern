@@ -1,17 +1,17 @@
 name: Bug report / 错误报告
-description: Report a reproducible problem in restore, scale, revise, or render.
+description: Report a reproducible problem in restore, scale, revise, render, or mobile PDF generation.
 title: "[Bug]: "
 labels: ["bug", "needs-triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting a problem. Remove usernames, absolute paths, tokens, and private image content from logs before posting.
+        Thanks for reporting a problem. Remove usernames, absolute paths, tokens, and private image or PDF content from logs before posting.
   - type: dropdown
     id: command
     attributes:
       label: Command
-      options: [restore, scale, revise, render, installation, other]
+      options: [restore, scale, revise, render, mobile-pdf, installation, other]
     validations:
       required: true
   - type: dropdown
@@ -25,8 +25,8 @@ body:
     id: versions
     attributes:
       label: Versions
-      description: Python, NumPy, Pillow, and restore-bead-pattern version or commit.
-      placeholder: "Python 3.12; NumPy 2.3.5; Pillow 12.3.0; v0.4.1"
+      description: Python, repository commit, and relevant NumPy/Pillow or pdfplumber/pypdf/ReportLab versions.
+      placeholder: "Python 3.12; pdfplumber 0.11.9; pypdf 6.10.0; ReportLab 4.4.9; commit abc1234"
     validations:
       required: true
   - type: textarea
@@ -55,7 +55,7 @@ body:
       options:
         - label: I removed credentials, personal information, absolute paths, and private source pixels.
           required: true
-        - label: Any attached image is mine to share or has a compatible public license.
+        - label: Any attached image, PDF, or other material is mine to share or has a compatible public license.
           required: true
         - label: This is not a security vulnerability; security reports belong in the private advisory form.
           required: true

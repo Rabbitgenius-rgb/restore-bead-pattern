@@ -29,6 +29,10 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: "1"
         run: python skills/restore-bead-pattern/scripts/self_test.py
+      - name: Run mobile PDF self-test
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python skills/mobile-bead-pattern-pdf/scripts/self_test.py
 
   macos-smoke:
     runs-on: macos-14
@@ -46,3 +50,7 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: "1"
         run: python skills/restore-bead-pattern/scripts/self_test.py
+      - name: Run mobile PDF self-test
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python skills/mobile-bead-pattern-pdf/scripts/self_test.py
